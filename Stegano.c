@@ -60,30 +60,40 @@ void encodeStegano(int nbBits, char *cover, char *secret)
         newByte = newByte ^ tempByte;
         putc(newByte, outFile);
     }
-    
+
     //read in the bitmap image data
     //fwrite(coverImage, bitmapInfoHeader->biSizeImage, 1, outFile);
 }
 
-void decodeStegano(int nbBits, char *encryptedImage){
+void decodeStegano(int nbBits, char *encryptedImage)
+{
 
     BITMAPINFOHEADER *bitmapInfoHeader = (BITMAPINFOHEADER *)malloc(sizeof(BITMAPINFOHEADER));
     BITMAPFILEHEADER *bitmapFileHeader = (BITMAPFILEHEADER *)malloc(sizeof(BITMAPFILEHEADER));
 
-    byte *BMPEncoded = LoadBitmapFile(encryptedImage,bitmapInfoHeader,bitmapFileHeader);
+    byte *BMPEncoded = LoadBitmapFile(encryptedImage, bitmapInfoHeader, bitmapFileHeader);
 
-    char *name = (char *)malloc(5+strlen(encryptedImage));
-    strcat(name,"new-");
-    strcat(name,encryptedImage);
+    char *name = (char *)malloc(5 + strlen(encryptedImage));
+    strcat(name, "new-");
+    strcat(name, encryptedImage);
 
-    FILE *outputBMP = fopen(name,"w+");
-    if(outputBMP==NULL){
+    FILE *outputBMP = fopen(name, "w+");
+    if (outputBMP == NULL)
+    {
         printf("Unable to create file\n");
         exit(-9);
     }
 
-    fwrite(bitmapFileHeader,sizeof(BITMAPFILEHEADER),1,outputBMP);
-    fwrite(bitmapInfoHeader,sizeof(BITMAPINFOHEADER),1,outputBMP);
+    fwrite(bitmapFileHeader, sizeof(BITMAPFILEHEADER), 1, outputBMP);
+    fwrite(bitmapInfoHeader, sizeof(BITMAPINFOHEADER), 1, outputBMP);
 
+    fseek(outputBMP, bitmapFileHeader->bfOffBits, SEEK_SET);
 
+    byte newByte;
+    for (int i = 0; i < bitmapInfoHeader->biSizeImage; i++){
+        newByte = BMPEncoded[i];
+        newByte = newByte >> (nbBits);
+        newByte = newByte << (8-nbBits);
+        putc(newByte,outputBMP);
+    }
 }
