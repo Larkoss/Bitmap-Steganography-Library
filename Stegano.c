@@ -11,13 +11,13 @@ void encodeStegano(int nbBits, char *cover, char *secret)
     byte *secretImage = LoadBitmapFile(secret, bitmapInfoHeader, bitmapFileHeader);
 
     //Create the output name
-    char *outputName = (char *)malloc(sizeof(char) * (6 + strlen(cover) + 1));
-    outputName = strcat(outputName, "new - ");
-    outputName = strcat(outputName, cover);
+    // char *outputName = (char *)malloc(sizeof(char) * (6 + strlen(cover) + 1));
+    // outputName = strcat(outputName, "new - ");
+    // outputName = strcat(outputName, cover);
 
     //Create the output file
     FILE *outFile;
-    outFile = fopen(outputName, "w+");
+    outFile = fopen("outtest.bmp", "w+");
     if (outFile == NULL)
     {
         //file not created
@@ -73,9 +73,9 @@ void decodeStegano(int nbBits, char *encryptedImage)
 
     byte *BMPEncoded = LoadBitmapFile(encryptedImage, bitmapInfoHeader, bitmapFileHeader);
 
-    char *name = (char *)malloc(5 + strlen(encryptedImage));
-    strcat(name, "new-");
-    strcat(name, encryptedImage);
+    // char *name = (char *)malloc(5 + strlen(encryptedImage));
+    // strcat(name, "new-");
+    // strcat(name, encryptedImage);
 
     FILE *outputBMP = fopen("decrypt.bmp", "w+");
     if (outputBMP == NULL)
@@ -96,4 +96,7 @@ void decodeStegano(int nbBits, char *encryptedImage)
         newByte = newByte << (8-nbBits);
         putc(newByte,outputBMP);
     }
+
+    //REVERSE RGB TO BGR !!!!
+    
 }
