@@ -77,7 +77,7 @@ void decodeStegano(int nbBits, char *encryptedImage)
     strcat(name, "new-");
     strcat(name, encryptedImage);
 
-    FILE *outputBMP = fopen(name, "w+");
+    FILE *outputBMP = fopen("decrypt.bmp", "w+");
     if (outputBMP == NULL)
     {
         printf("Unable to create file\n");
