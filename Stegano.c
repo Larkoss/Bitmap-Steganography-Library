@@ -1,5 +1,5 @@
-#include "encodeStegano.h"
-#include <string.h>
+#include "Stegano.h"
+
 void encodeStegano(int nbBits, char *cover, char *secret)
 {
     //Both files are the same size, so they have the same headers
@@ -63,4 +63,27 @@ void encodeStegano(int nbBits, char *cover, char *secret)
     
     //read in the bitmap image data
     //fwrite(coverImage, bitmapInfoHeader->biSizeImage, 1, outFile);
+}
+
+void decodeStegano(int nbBits, char *encryptedImage){
+
+    BITMAPINFOHEADER *bitmapInfoHeader = (BITMAPINFOHEADER *)malloc(sizeof(BITMAPINFOHEADER));
+    BITMAPFILEHEADER *bitmapFileHeader = (BITMAPFILEHEADER *)malloc(sizeof(BITMAPFILEHEADER));
+
+    byte *BMPEncoded = LoadBitmapFile(encryptedImage,bitmapInfoHeader,bitmapFileHeader);
+
+    char *name = (char *)malloc(5+strlen(encryptedImage));
+    strcat(name,"new-");
+    strcat(name,encryptedImage);
+
+    FILE *outputBMP = fopen(name,"w+");
+    if(outputBMP==NULL){
+        printf("Unable to create file\n");
+        exit(-9);
+    }
+
+    fwrite(bitmapFileHeader,sizeof(BITMAPFILEHEADER),1,outputBMP);
+    fwrite(bitmapInfoHeader,sizeof(BITMAPINFOHEADER),1,outputBMP);
+
+
 }
