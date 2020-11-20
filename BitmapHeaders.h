@@ -35,7 +35,7 @@ typedef struct
     dword biClrUsed;
     dword biClrImportant;
 
-} BITMAPINFOHEADER;
+}__attribute__((__packed__)) BITMAPINFOHEADER;
 
 byte *LoadBitmapFile(char *BMPFileName, BITMAPINFOHEADER *bitmapInfoHeader, BITMAPFILEHEADER *bitmapFileHeader);
 

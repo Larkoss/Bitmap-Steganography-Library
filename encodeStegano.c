@@ -60,7 +60,7 @@ void encodeStegano(int nbBits, char *cover, char *secret)
         newByte = newByte ^ tempByte;
         putc(newByte, outFile);
     }
-
+    
     //read in the bitmap image data
     //fwrite(coverImage, bitmapInfoHeader->biSizeImage, 1, outFile);
 }

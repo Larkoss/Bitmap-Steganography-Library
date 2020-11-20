@@ -91,9 +91,9 @@ int main(int args, char *arg[])
 {
     BITMAPINFOHEADER *bitmapInfoHeader = (BITMAPINFOHEADER *)malloc(sizeof(BITMAPINFOHEADER));
     BITMAPFILEHEADER *bitmapFileHeader = (BITMAPFILEHEADER *)malloc(sizeof(BITMAPFILEHEADER));
-    //byte *bitmapImage = LoadBitmapFile(arg[1], bitmapInfoHeader, bitmapFileHeader);
-    //printMETA(bitmapInfoHeader, bitmapFileHeader);
-    //grayscale(bitmapImage, bitmapInfoHeader, bitmapFileHeader, arg[2]);
-    int nbBits = 4;
-    encodeStegano(nbBits, arg[1], arg[2]);
+    byte *bitmapImage = LoadBitmapFile(arg[1], bitmapInfoHeader, bitmapFileHeader);
+    printMETA(bitmapInfoHeader, bitmapFileHeader);
+    grayscale(bitmapImage, bitmapInfoHeader, bitmapFileHeader, arg[2]);
+    // int nbBits = 4;
+    // encodeStegano(nbBits, arg[1], arg[2]);
 }
