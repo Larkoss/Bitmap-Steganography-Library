@@ -1,6 +1,7 @@
 #include "BitmapHeaders.h"
 #include "grayscale.h"
 #include "Stegano.h"
+#include "textInPic.h"
 
 byte *LoadBitmapFile(char *BMPFileName, BITMAPINFOHEADER *bitmapInfoHeader, BITMAPFILEHEADER *bitmapFileHeader)
 {
@@ -98,6 +99,9 @@ int main(int args, char *arg[])
     // int nbBits = 4;
     // encodeStegano(nbBits, arg[1], arg[2]);
     //decodeStegano(4,arg[1]);
-    stringToImage(arg[1], arg[2]);
+    //stringToImage(arg[1], arg[2]);
+
+    //printf("\n%d",getBit("clear",2));
+
     
 }
