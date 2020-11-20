@@ -5,7 +5,7 @@
 
 int getBit(char *m, int n);
 
-
+int * createPermutationFunction(int N, unsigned int systemkey);
 
 
 
