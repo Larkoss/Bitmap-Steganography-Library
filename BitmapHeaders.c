@@ -97,7 +97,7 @@ int main(int args, char *arg[])
     // grayscale(bitmapImage, bitmapInfoHeader, bitmapFileHeader, arg[2]);
     // int nbBits = 4;
     // encodeStegano(nbBits, arg[1], arg[2]);
-
-    decodeStegano(4,arg[1]);
+    //decodeStegano(4,arg[1]);
+    stringToImage(arg[1], arg[2]);
     
 }
