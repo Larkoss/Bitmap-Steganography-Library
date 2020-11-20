@@ -73,9 +73,20 @@ void decodeStegano(int nbBits, char *encryptedImage)
 
     byte *BMPEncoded = LoadBitmapFile(encryptedImage, bitmapInfoHeader, bitmapFileHeader);
 
-    // char *name = (char *)malloc(5 + strlen(encryptedImage));
-    // strcat(name, "new-");
-    // strcat(name, encryptedImage);
+    byte tempRGB;
+    for (int i = 0; i < bitmapInfoHeader->biSizeImage; i += 3){
+        tempRGB = BMPEncoded[i];
+        BMPEncoded[i] = BMPEncoded[i+2];
+        BMPEncoded[i+2] = tempRGB;
+    }
+
+    /**
+     * LARKO PLEASE DE TO TOUTO TO THEMA ME TO STRING NAME CAUSE IT'S FUCKED!!!
+     * 
+     */
+    char *name = (char *)malloc(5 + strlen(encryptedImage));
+    strcat(name, "new-");
+    strcat(name, encryptedImage);
 
     FILE *outputBMP = fopen("decrypt.bmp", "w+");
     if (outputBMP == NULL)
@@ -97,6 +108,8 @@ void decodeStegano(int nbBits, char *encryptedImage)
         putc(newByte,outputBMP);
     }
 
-    //REVERSE RGB TO BGR !!!!
+    
+    
+
     
 }
