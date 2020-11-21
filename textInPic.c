@@ -17,7 +17,7 @@ int getBit(char *m, int n)
 
 int *createPermutationFunction(int N, unsigned int systemkey)
 {
-    int permArray[N];
+    int *permArray = (int *)malloc(N*sizeof(int));
 
     //Initialize arrayy with simplest permutation f(x) = x
     for (int i = 0; i < N; i++)
@@ -40,4 +40,59 @@ int *createPermutationFunction(int N, unsigned int systemkey)
     }
 
     return permArray;
+}
+
+void encodeText(char *coverImageName, char *inputTextFileName, int syskey)
+{
+    BITMAPFILEHEADER *bitmapFileHeader = (BITMAPFILEHEADER *)malloc(sizeof(BITMAPFILEHEADER));
+    BITMAPINFOHEADER *bitmapInfoHeader = (BITMAPINFOHEADER *)malloc(sizeof(BITMAPINFOHEADER));
+
+    byte *BMPDataArray = LoadBitmapFile(coverImageName, bitmapInfoHeader, bitmapFileHeader);
+
+    byte tempRGB;
+
+    for (int i = 0; i < bitmapInfoHeader->biSizeImage; i += 3) // fixed semicolon
+    {
+        tempRGB = BMPDataArray[i];
+        BMPDataArray[i] = BMPDataArray[i + 2];
+        BMPDataArray[i + 2] = tempRGB;
+    }
+
+    FILE *outputImage = fopen("newSecretMessage.bmp", "w");
+    FILE *secretMessage = fopen(inputTextFileName, "r");
+
+    //Find the length of the file
+    fseek(secretMessage, 0, SEEK_END);
+    long sizeFile = ftell(secretMessage);
+    fseek(secretMessage, 0, SEEK_SET);
+
+    //read the file
+    char *message = (char *)malloc((sizeFile + 1) * sizeof(char));
+    char temp[1024];
+    while (fgets(temp, 1024, secretMessage) != NULL)
+    {
+        strcat(message, temp);
+    }
+
+    //Write bitmapFileHeader,bitmapInfoHeader to the new immage
+    fwrite(bitmapFileHeader, sizeof(BITMAPFILEHEADER), 1, outputImage);
+    fwrite(bitmapInfoHeader, sizeof(BITMAPINFOHEADER), 1, outputImage);
+    fseek(outputImage, bitmapFileHeader->bfOffBits, SEEK_SET);
+
+    int *permutation = (int *)malloc(bitmapInfoHeader->biSizeImage * sizeof(int));
+    permutation = createPermutationFunction(bitmapInfoHeader->biSizeImage, syskey);
+    
+
+    for (int i = 0; i < 1+8 * strlen(message); i++)
+    {
+        int b = getBit(message, i);
+        int o = permutation[i];
+        BMPDataArray[o] = BMPDataArray[o] >> 1;
+        BMPDataArray[o] = BMPDataArray[o] << 1;
+        BMPDataArray[o] = BMPDataArray[o] | b;
+    }
+
+    for(int i = 0; i<bitmapInfoHeader->biSizeImage;i++){
+        fputc(BMPDataArray[i],outputImage);
+    }
 }
