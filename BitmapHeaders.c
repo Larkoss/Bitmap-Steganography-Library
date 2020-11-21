@@ -106,7 +106,7 @@ int main(int args, char *arg[])
     //encodeText(arg[1],arg[2]);
 
 
-    decodeText(arg[1],arg[2],2);
+    decodeText(arg[1],arg[2],3);
 
     
 }

@@ -25,18 +25,18 @@ int *createPermutationFunction(int N, unsigned int systemkey)
     }
 
     //set seed
-    // srand(systemkey);
-    // for (int i = 0; i < N; i++)
-    // {
-    //     int j = rand();
-    //     int k = rand();
-    //     j = j % (N);
-    //     k = k % (N);
+    srand(systemkey);
+    for (int i = 0; i < N; i++)
+    {
+        int j = rand();
+        int k = rand();
+        j = j % (N);
+        k = k % (N);
 
-    //     int temp = permArray[j];
-    //     permArray[j] = permArray[k];
-    //     permArray[k] = temp;
-    // }
+        int temp = permArray[j];
+        permArray[j] = permArray[k];
+        permArray[k] = temp;
+    }
 
     return permArray;
 }
@@ -115,22 +115,25 @@ void decodeText(char *encryptedImageName, char *outputFileName, int msgLength)
     int *permutation = (int *)malloc(bitmapInfoHeader->biSizeImage * sizeof(int));
     permutation = createPermutationFunction(bitmapInfoHeader->biSizeImage, 78);
 
-    byte byteWriter[msgLength + 1];
+    char byteWriter[msgLength + 1];
     for (int i = 0; i < msgLength + 1; i++)
     {
         byteWriter[i] = 0;
     }
 
-    for (int i = 0; i < 8 * msgLength; i++)
+    for (int i = 0; i < 8 * msgLength +1; i++)
     {
         int o = permutation[i];
         int B = BMPDataArray[o];
 
+
+
         B = B % 2;
-        byteWriter[i / 8] = byteWriter[i / 8] + pow((7 - (i % 8)), 2) * B;
+    
+        byteWriter[i / 8] = byteWriter[i / 8] + pow(2,(7 - (i % 8))) * B;
     }
 
-    for (int i = 0; i < msgLength + 1; i++)
+    for (int i = 0; i < msgLength; i++)
     {
         putc(byteWriter[i], outputTXT);
     }
