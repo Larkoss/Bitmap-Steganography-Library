@@ -111,6 +111,26 @@ void decodeText(char *encryptedImageName, char *outputFileName, int msgLength)
         BMPDataArray[i + 2] = tempRGB;
     }
 
-    FILE *outputTXT = fopen(outputFileName,"w");
-    
+    FILE *outputTXT = fopen(outputFileName, "w");
+
+    int *permutation = (int *)malloc(bitmapInfoHeader->biSizeImage * sizeof(int));
+    permutation = createPermutationFunction(bitmapInfoHeader->biSizeImage, 78);
+
+    char byteWriter[msgLength +1];
+
+    for (int i = 0; i < 8*msgLength; i++)
+    {
+        int o = permutation[i];
+        byte B = BMPDataArray[o];
+        B = B%2;
+
+        byteWriter[i/8] = byteWriter[i/8] + pow((7-(i%8)),2)*B;
+        printf("\n%c",byteWriter[i/8]);
+    }
+
+    byteWriter[msgLength] = '\0';
+
+    for(int i = 0;i<msgLength +1;i++){
+        putc(byteWriter[i],outputTXT);
+    }
 }
