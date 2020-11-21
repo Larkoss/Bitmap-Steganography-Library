@@ -25,7 +25,7 @@ typedef struct
 {
     dword biSize;
     dword biWidth;
-    dword biHeight;
+    dword biHeight; 
     word biPlanes;
     word biBitCount;
     dword biCompression; //MUST BE 0 TO WORK!!

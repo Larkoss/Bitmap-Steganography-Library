@@ -5,7 +5,7 @@ void stringToImage(char *imageName, char *strFile)
     BITMAPINFOHEADER *bitmapInfoHeader = (BITMAPINFOHEADER *)malloc(sizeof(BITMAPINFOHEADER));
     BITMAPFILEHEADER *bitmapFileHeader = (BITMAPFILEHEADER *)malloc(sizeof(BITMAPFILEHEADER));
     byte *imageData= LoadBitmapFile(imageName, bitmapInfoHeader, bitmapFileHeader);
-    printMETA(bitmapFileHeader, bitmapInfoHeader);
+    printMETA(bitmapInfoHeader, bitmapFileHeader);
     //Create the output name
     char *outputName = (char *)malloc(sizeof(char) * (6 + strlen(imageName) + 1));
     outputName = strcat(outputName, "new - ");
@@ -31,20 +31,20 @@ void stringToImage(char *imageName, char *strFile)
     fseek(outFile, bitmapFileHeader->bfOffBits, SEEK_SET);
 
     //allocate enough memory for the bitmap image data
-    byte *newImage = (byte *)malloc(bitmapInfoHeader->biSizeImage);
+    //byte *newImage = (byte *)malloc(bitmapInfoHeader->biSizeImage);
 
-    int width = bitmapInfoHeader->biWidth, height = bitmapInfoHeader->biHeight;
-    printf("height = %d, width = %d\n", height, width);
-    int count = 0;
-    for (int j = width; j <= width * height; j*=2){
-        for (int i = 0; i < height; i++){
-            newImage[count++] = imageData[j - i];
-            //printf("%d ", count);
-        }
-        //printf("\n");
-    }
+    // int width = bitmapInfoHeader->biWidth, height = bitmapInfoHeader->biHeight;
+    // printf("height = %d, width = %d\n", height, width);
+    // int count = 0;
+    // for (int j = width; j <= width * height; j*=2){
+    //     for (int i = 0; i < height; i++){
+    //         newImage[count++] = imageData[j - i];
+    //         printf("%c ", count);
+    //     }
+    //     printf("\n");
+    // }
     
-    //read in the bitmap image data
+    //write in the bitmap image data
     //fwrite(outputName, bitmapInfoHeader->biSizeImage, 1, outFile);
 
 }
