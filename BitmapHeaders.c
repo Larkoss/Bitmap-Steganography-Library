@@ -103,10 +103,10 @@ int main(int args, char *arg[])
 
     //printf("\n%d",getBit("clear",2));
 
-    //encodeText(arg[1],arg[2]);
+    encodeText(arg[1],arg[2]);
 
 
-    decodeText(arg[1],arg[2],5);
+    //decodeText(arg[1],arg[2],5);
 
     
 }
