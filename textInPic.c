@@ -10,7 +10,6 @@ int getBit(char *m, int n)
     else
     {
         byte M = m[n / 8];
-        printf("\n%c , %d  , %d",M,n,(M >> (7 - (n % 8))) % 2);
         return (M >> (7 - (n % 8))) % 2;
     }
 }
@@ -26,18 +25,18 @@ int *createPermutationFunction(int N, unsigned int systemkey)
     }
 
     //set seed
-    srand(systemkey);
-    for (int i = 0; i < N; i++)
-    {
-        int j = rand();
-        int k = rand();
-        j = j % (N);
-        k = k % (N);
+    // srand(systemkey);
+    // for (int i = 0; i < N; i++)
+    // {
+    //     int j = rand();
+    //     int k = rand();
+    //     j = j % (N);
+    //     k = k % (N);
 
-        int temp = permArray[j];
-        permArray[j] = permArray[k];
-        permArray[k] = temp;
-    }
+    //     int temp = permArray[j];
+    //     permArray[j] = permArray[k];
+    //     permArray[k] = temp;
+    // }
 
     return permArray;
 }
@@ -74,8 +73,6 @@ void encodeText(char *coverImageName, char *inputTextFileName)
         strcat(message, temp);
     }
 
-
-
     //Write bitmapFileHeader,bitmapInfoHeader to the new immage
     fwrite(bitmapFileHeader, sizeof(BITMAPFILEHEADER), 1, outputImage);
     fwrite(bitmapInfoHeader, sizeof(BITMAPINFOHEADER), 1, outputImage);
@@ -91,7 +88,6 @@ void encodeText(char *coverImageName, char *inputTextFileName)
         BMPDataArray[o] = BMPDataArray[o] >> 1;
         BMPDataArray[o] = BMPDataArray[o] << 1;
         BMPDataArray[o] = BMPDataArray[o] | b;
-       
     }
 
     for (int i = 0; i < bitmapInfoHeader->biSizeImage; i++)
@@ -119,21 +115,23 @@ void decodeText(char *encryptedImageName, char *outputFileName, int msgLength)
     int *permutation = (int *)malloc(bitmapInfoHeader->biSizeImage * sizeof(int));
     permutation = createPermutationFunction(bitmapInfoHeader->biSizeImage, 78);
 
-    byte byteWriter[msgLength +1];
-
-    for (int i = 0; i < 8*msgLength; i++)
+    byte byteWriter[msgLength + 1];
+    for (int i = 0; i < msgLength + 1; i++)
     {
-        int o = permutation[i];
-        byte B = BMPDataArray[o];
-        
-        B = B%2;
-        printf("\n%d",B);
-        byteWriter[i/8] = byteWriter[i/8] + pow((7-(i%8)),2)*B;
-        
+        byteWriter[i] = 0;
     }
 
+    for (int i = 0; i < 8 * msgLength; i++)
+    {
+        int o = permutation[i];
+        int B = BMPDataArray[o];
 
-    for(int i = 0;i<msgLength +1;i++){
-        putc(byteWriter[i],outputTXT);
+        B = B % 2;
+        byteWriter[i / 8] = byteWriter[i / 8] + pow((7 - (i % 8)), 2) * B;
+    }
+
+    for (int i = 0; i < msgLength + 1; i++)
+    {
+        putc(byteWriter[i], outputTXT);
     }
 }
