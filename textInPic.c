@@ -17,7 +17,7 @@ int getBit(char *m, int n)
 
 int *createPermutationFunction(int N, unsigned int systemkey)
 {
-    int *permArray = (int *)malloc(N*sizeof(int));
+    int *permArray = (int *)malloc(N * sizeof(int));
 
     //Initialize arrayy with simplest permutation f(x) = x
     for (int i = 0; i < N; i++)
@@ -42,7 +42,7 @@ int *createPermutationFunction(int N, unsigned int systemkey)
     return permArray;
 }
 
-void encodeText(char *coverImageName, char *inputTextFileName, int syskey)
+void encodeText(char *coverImageName, char *inputTextFileName)
 {
     BITMAPFILEHEADER *bitmapFileHeader = (BITMAPFILEHEADER *)malloc(sizeof(BITMAPFILEHEADER));
     BITMAPINFOHEADER *bitmapInfoHeader = (BITMAPINFOHEADER *)malloc(sizeof(BITMAPINFOHEADER));
@@ -80,10 +80,9 @@ void encodeText(char *coverImageName, char *inputTextFileName, int syskey)
     fseek(outputImage, bitmapFileHeader->bfOffBits, SEEK_SET);
 
     int *permutation = (int *)malloc(bitmapInfoHeader->biSizeImage * sizeof(int));
-    permutation = createPermutationFunction(bitmapInfoHeader->biSizeImage, syskey);
-    
+    permutation = createPermutationFunction(bitmapInfoHeader->biSizeImage, 78);
 
-    for (int i = 0; i < 1+8 * strlen(message); i++)
+    for (int i = 0; i < 1 + 8 * strlen(message); i++)
     {
         int b = getBit(message, i);
         int o = permutation[i];
@@ -92,7 +91,26 @@ void encodeText(char *coverImageName, char *inputTextFileName, int syskey)
         BMPDataArray[o] = BMPDataArray[o] | b;
     }
 
-    for(int i = 0; i<bitmapInfoHeader->biSizeImage;i++){
-        fputc(BMPDataArray[i],outputImage);
+    for (int i = 0; i < bitmapInfoHeader->biSizeImage; i++)
+    {
+        fputc(BMPDataArray[i], outputImage);
     }
+}
+
+void decodeText(char *encryptedImageName, char *outputFileName, int msgLength)
+{
+    BITMAPFILEHEADER *bitmapFileHeader = (BITMAPFILEHEADER *)malloc(sizeof(BITMAPFILEHEADER));
+    BITMAPINFOHEADER *bitmapInfoHeader = (BITMAPINFOHEADER *)malloc(sizeof(BITMAPINFOHEADER));
+    byte *BMPDataArray = LoadBitmapFile(encryptedImageName, bitmapInfoHeader, bitmapFileHeader);
+    byte tempRGB;
+
+    for (int i = 0; i < bitmapInfoHeader->biSizeImage; i += 3) // fixed semicolon
+    {
+        tempRGB = BMPDataArray[i];
+        BMPDataArray[i] = BMPDataArray[i + 2];
+        BMPDataArray[i + 2] = tempRGB;
+    }
+
+    FILE *outputTXT = fopen(outputFileName,"w");
+    
 }
