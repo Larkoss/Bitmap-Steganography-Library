@@ -1,6 +1,7 @@
 #include "BitmapHeaders.h"
 #include "grayscale.h"
 #include "Stegano.h"
+#include "partC.h"
 
 byte *LoadBitmapFile(char *BMPFileName, BITMAPINFOHEADER *bitmapInfoHeader, BITMAPFILEHEADER *bitmapFileHeader)
 {
@@ -94,7 +95,7 @@ int main(int args, char *arg[])
     //BITMAPFILEHEADER *bitmapFileHeader = (BITMAPFILEHEADER *)malloc(sizeof(BITMAPFILEHEADER));
     //byte *bitmapImage = LoadBitmapFile(arg[1], bitmapInfoHeader, bitmapFileHeader);
     // printMETA(bitmapInfoHeader, bitmapFileHeader);
-    // grayscale(bitmapImage, bitmapInfoHeader, bitmapFileHeader, arg[2]);
+    //grayscale(arg[1]);
     // int nbBits = 4;
     // encodeStegano(nbBits, arg[1], arg[2]);
     // decodeStegano(4,arg[1]);

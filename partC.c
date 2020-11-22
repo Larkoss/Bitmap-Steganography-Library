@@ -35,6 +35,8 @@ void stringToImage(char *imageName, char *strFile)
 
     //Create the output name
     char *outputName = (char *)malloc(sizeof(char) * (strlen(imageName) + 5));
+    char *dummy = outputName;
+    *dummy = '\0';
     outputName = strcat(outputName, "new-");
     outputName = strcat(outputName, imageName);
 
