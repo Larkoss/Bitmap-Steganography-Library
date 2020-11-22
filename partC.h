@@ -4,6 +4,8 @@
 
 void stringToImage(char *imageName, char *strFile);
 
-void imamgeToString(char *strFile);
+void imageToString(char *strFile);
+
+int *createFinalBitImage(int height, int width, char *imageData, int biImageSize);
 
 #endif

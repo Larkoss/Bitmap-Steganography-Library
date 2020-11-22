@@ -11,13 +11,13 @@ void encodeStegano(int nbBits, char *cover, char *secret)
     byte *secretImage = LoadBitmapFile(secret, bitmapInfoHeader, bitmapFileHeader);
 
     //Create the output name
-    // char *outputName = (char *)malloc(sizeof(char) * (6 + strlen(cover) + 1));
-    // outputName = strcat(outputName, "new - ");
-    // outputName = strcat(outputName, cover);
+    char *outputName = (char *)malloc(sizeof(char) * (strlen(cover) + 5));
+    outputName = strcat(outputName, "new-");
+    outputName = strcat(outputName, cover);
 
     //Create the output file
     FILE *outFile;
-    outFile = fopen("outtest.bmp", "w+");
+    outFile = fopen("outputName", "w+");
     if (outFile == NULL)
     {
         //file not created
