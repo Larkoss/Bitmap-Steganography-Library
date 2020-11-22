@@ -35,9 +35,9 @@ void VFlipArray(int **array, int columns, int rows)
 	}
 }
 
-int *createBitImage(char *image, int imageSize)
+int *createBitImage(int height, int width, char *image, int imageSize)
 {
-	int *bitImage = (int *)malloc(sizeof(int) * imageSize * 8);
+	int *bitImage = (int *)malloc(sizeof(int) * width * height * 8);
 	char temp;
 	for (int i = 0; i < imageSize; i++)
 	{
@@ -59,13 +59,15 @@ int *createBitImage(char *image, int imageSize)
 			bitImage[i * 8 + 7 - j] = temp;
 		}
 	}
+	for(int i = imageSize * 8; i < width * height * 8; i++)
+		bitImage[i] = 0;
 	return bitImage;
 }
 
 int *createFinalBitImage(int height, int width, char *imageData, int biImageSize)
 {
 	int h = height, w = width;
-	int *bitImage = createBitImage(imageData, biImageSize);
+	int *bitImage = createBitImage(height, width, imageData, biImageSize);
 
 	int **arr = (int **)malloc(h * sizeof(int *));
 	for (int i = 0; i < h; i++)
@@ -94,3 +96,11 @@ int *createFinalBitImage(int height, int width, char *imageData, int biImageSize
 	}
 	return bitImage;
 }
+
+// int main(){
+// 	char arr[] = {'A', 'C'};
+// 	int *bitData = createFinalBitImage(5, 4, arr, 2);
+// 	for(int i = 0; i < 20; i++)
+// 		printf("%d ", bitData[i]);
+// 	printf("\n");
+// }

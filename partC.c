@@ -27,7 +27,7 @@ void stringToImage(char *imageName, char *strFile)
     BITMAPINFOHEADER *bitmapInfoHeader = (BITMAPINFOHEADER *)malloc(sizeof(BITMAPINFOHEADER));
     BITMAPFILEHEADER *bitmapFileHeader = (BITMAPFILEHEADER *)malloc(sizeof(BITMAPFILEHEADER));
     byte *imageData= LoadBitmapFile(imageName, bitmapInfoHeader, bitmapFileHeader);
-    printMETA(bitmapInfoHeader, bitmapFileHeader);
+    //printMETA(bitmapInfoHeader, bitmapFileHeader);
 
     //Read all character from the file
     int textSize;
@@ -61,10 +61,10 @@ void stringToImage(char *imageName, char *strFile)
     
     //printf("size of file = %d\n", textSize);
     //printf("%c %c\n", text[0], text[1]);
-	int *bitData = (int *)malloc(sizeof(int) * 8 * textSize);
+	int *bitData = createFinalBitImage(bitmapInfoHeader->biHeight, bitmapInfoHeader->biWidth, text, textSize);
     int count = 0;
     //printf("height = %d, width = %d\n", bitmapInfoHeader->biHeight, bitmapInfoHeader->biWidth);
-	bitData = createFinalBitImage(bitmapInfoHeader->biHeight, bitmapInfoHeader->biWidth, text, textSize);
+    
     for (int i = 0; i < bitmapInfoHeader->biSizeImage; i += 3) // fixed semicolon
     {
         if(bitData[count] == 0)
@@ -80,16 +80,7 @@ void stringToImage(char *imageName, char *strFile)
             fputc(128, outFile);
         }
         count ++;
-        if(count == (textSize * 8 - 1) );
-            break;
     }
-    for(int i = textSize * 8 - 1; i <bitmapInfoHeader->biSizeImage; i += 3){
-        fputc(128, outFile);
-        fputc(0, outFile);
-        fputc(0, outFile);
-    }
-
-	
 }
 
 
