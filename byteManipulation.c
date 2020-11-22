@@ -1,4 +1,5 @@
 #include "partC.h"
+#include <math.h>
 
 void printArr(int **arr, int h, int w)
 {
@@ -59,7 +60,7 @@ int *createBitImage(int height, int width, char *image, int imageSize)
 			bitImage[i * 8 + 7 - j] = temp;
 		}
 	}
-	for(int i = imageSize * 8; i < width * height * 8; i++)
+	for (int i = imageSize * 8; i < width * height * 8; i++)
 		bitImage[i] = 0;
 	return bitImage;
 }
@@ -97,10 +98,56 @@ int *createFinalBitImage(int height, int width, char *imageData, int biImageSize
 	return bitImage;
 }
 
-// int main(){
+void reverseFinalBitImage(int height, int width, int *bitImage)
+{
+	int h = height, w = width;
+	int **arr = (int **)malloc(h * sizeof(int *));
+	for (int i = 0; i < h; i++)
+		arr[i] = (int *)malloc(w * sizeof(int));
+
+	//
+	int count = 0;
+	for (int i = 0; i < h; i++)
+	{
+		for (int j = 0; j < w; j++)
+		{
+			arr[i][j] = bitImage[count++];
+		}
+	}
+	//printArr(arr, h, w);
+	VFlipArray(arr, w, h);
+	//printArr(arr, h, w);
+	count = 0;
+	for (int j = 0; j < w; j++)
+	{
+		for (int i = 0; i < h; i++)
+		{
+			bitImage[count++] = arr[i][j];
+		}
+	}
+}
+
+// int main()
+// {
 // 	char arr[] = {'A', 'C'};
-// 	int *bitData = createFinalBitImage(5, 4, arr, 2);
-// 	for(int i = 0; i < 20; i++)
-// 		printf("%d ", bitData[i]);
+// 	int *bitImage = createFinalBitImage(4, 4, arr, 2);
+// 	for(int i = 0; i < 16; i++)
+// 		printf("%d ", bitImage[i]);
 // 	printf("\n");
+// 	reverseFinalBitImage(4, 4, bitImage);
+// 	for(int i = 0; i < 16; i++)
+// 		printf("%d ", bitImage[i]);
+// 	printf("\n");
+// 	    int tempChar;
+//     for(int i = 0; i < 16; i+=8)
+//     {
+//         tempChar = 0;
+//         for(int j = 0; j < 8; j++)
+//             if(bitImage[i + j] == 1)
+//                 tempChar += pow(2, 7 - j);
+//         //text[i / 8] = tempChar;
+//         //fputc(tempChar, outFile);
+//         printf("%c ", tempChar);
+// 		printf("%d ", tempChar);
+//     }
 // }
