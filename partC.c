@@ -103,7 +103,7 @@ void imageToString(char *imageName)
         exit(-9);
     }
 
-    int height = bitmapInfoHeader->biHeight, width =bitmapInfoHeader->biWidth;
+    int height = bitmapInfoHeader->biHeight, width = bitmapInfoHeader->biWidth;
     int *bitImage = (int *)malloc(sizeof(int) * width * height * 8);
     int count = 0;
     for (int i = 0; i < bitmapInfoHeader->biSizeImage; i += 3) 
@@ -113,18 +113,16 @@ void imageToString(char *imageName)
         else
             bitImage[count++] = 1;
     }
+
     reverseFinalBitImage(height, width, bitImage);
 
-    //char *text = (char *)malloc(sizeof(char) * count / 8);
-    int tempChar;
+    char tempChar;
     for(int i = 0; i < count; i+=8)
     {
         tempChar = 0;
         for(int j = 0; j < 8; j++)
             if(bitImage[i + j] == 1)
                 tempChar += pow(2, 7 - j);
-        //text[i / 8] = tempChar;
         fputc(tempChar, outFile);
-        //printf("%d ", tempChar);
     }
 }

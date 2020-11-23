@@ -53,7 +53,7 @@ int *createBitImage(int height, int width, char *image, int imageSize)
 			}
 			temp >>= 1;
 		}
-		for (int j = 0; j <= 4; j++)
+		for (int j = 0; j < 4; j++)
 		{
 			int temp = bitImage[i * 8 + j];
 			bitImage[i * 8 + j] = bitImage[i * 8 + 7 - j];
@@ -126,28 +126,3 @@ void reverseFinalBitImage(int height, int width, int *bitImage)
 		}
 	}
 }
-
-// int main()
-// {
-// 	char arr[] = {'A', 'C'};
-// 	int *bitImage = createFinalBitImage(4, 4, arr, 2);
-// 	for(int i = 0; i < 16; i++)
-// 		printf("%d ", bitImage[i]);
-// 	printf("\n");
-// 	reverseFinalBitImage(4, 4, bitImage);
-// 	for(int i = 0; i < 16; i++)
-// 		printf("%d ", bitImage[i]);
-// 	printf("\n");
-// 	    int tempChar;
-//     for(int i = 0; i < 16; i+=8)
-//     {
-//         tempChar = 0;
-//         for(int j = 0; j < 8; j++)
-//             if(bitImage[i + j] == 1)
-//                 tempChar += pow(2, 7 - j);
-//         //text[i / 8] = tempChar;
-//         //fputc(tempChar, outFile);
-//         printf("%c ", tempChar);
-// 		printf("%d ", tempChar);
-//     }
-// }

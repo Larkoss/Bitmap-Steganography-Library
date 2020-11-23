@@ -99,6 +99,6 @@ int main(int args, char *arg[])
     // int nbBits = 4;
     // encodeStegano(nbBits, arg[1], arg[2]);
     // decodeStegano(4,arg[1]);
-    //stringToImage(arg[1], arg[2]);
-    imageToString(arg[1]);
+    stringToImage(arg[1], arg[2]);
+    imageToString(arg[3]);
 }
