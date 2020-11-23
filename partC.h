@@ -4,6 +4,10 @@
 
 void stringToImage(char *imageName, char *strFile);
 
-void imamgeToString(char *strFile);
+void imageToString(char *imageName);
+
+int *createFinalBitImage(int height, int width, char *imageData, int biImageSize);
+
+void reverseFinalBitImage(int height, int width, int *bitImage);
 
 #endif

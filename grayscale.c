@@ -1,6 +1,17 @@
 #include "grayscale.h"
-void grayscale(byte *bitmapImage, BITMAPINFOHEADER *bitmapInfoHeader, BITMAPFILEHEADER *bitmapFileHeader, char *outputName)
+void grayscale(char *imageName)
 {
+    BITMAPINFOHEADER *bitmapInfoHeader = (BITMAPINFOHEADER *)malloc(sizeof(BITMAPINFOHEADER));
+    BITMAPFILEHEADER *bitmapFileHeader = (BITMAPFILEHEADER *)malloc(sizeof(BITMAPFILEHEADER));
+    byte *bitmapImage = LoadBitmapFile(imageName, bitmapInfoHeader, bitmapFileHeader);
+    
+    //Create the output name
+    char *outputName = (char *)malloc(sizeof(char) * (strlen(imageName) + 5));
+    char *dummy = outputName;
+    *dummy = '\0';
+    outputName = strcat(outputName, "new-");
+    outputName = strcat(outputName, imageName);
+
     FILE *outFile; //destination file
     outFile = fopen(outputName, "w+");
     if (outFile == NULL)
