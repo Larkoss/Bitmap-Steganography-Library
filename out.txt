@@ -1,1 +1,7 @@
-I am happy this works!
+Product Description
+"The Pure Wings 2 fans bring famous be quiet! silent cooling to entry level computing, yet are also appropriate for gaming and multimedia systems. The most important features include:
+
+Nine airflow-optimised fan blades that reduce noise-generating turbulence while increasing airflow
+Even at maximum speed, the 140mm size operates at only 18.8 dB(A)
+A long-life rifle bearing that contributes to an operating lifetime of 80,000 hours (> 9 years)
+Product conception, design and quality control in Germany"
