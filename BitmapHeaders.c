@@ -97,8 +97,8 @@ int main(int args, char *arg[])
     // printMETA(bitmapInfoHeader, bitmapFileHeader);
     // grayscale(bitmapImage, bitmapInfoHeader, bitmapFileHeader, arg[2]);
     // int nbBits = 4;
-    encodeStegano(4, arg[1], arg[2]);
-    //decodeStegano(4,arg[1]);
+    //encodeStegano(4, arg[1], arg[2]);
+    decodeStegano(4,arg[1]);
     //stringToImage(arg[1], arg[2]);
 
     //printf("\n%d",getBit("clear",2));

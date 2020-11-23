@@ -101,7 +101,7 @@ void decodeStegano(int nbBits, char *encryptedImage)
     byte newByte;
     for (int i = 0; i < bitmapInfoHeader->biSizeImage; i++){
         newByte = BMPEncoded[i];
-        newByte = newByte >> (nbBits);
+        newByte = newByte % (int)pow(2,nbBits);
         newByte = newByte << (8-nbBits);
         putc(newByte,outputBMP);
     }
