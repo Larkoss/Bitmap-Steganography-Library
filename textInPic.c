@@ -83,8 +83,7 @@ void encodeText(char *coverImageName, char *inputTextFileName)
     fwrite(bitmapInfoHeader, sizeof(BITMAPINFOHEADER), 1, outputImage);
     fseek(outputImage, bitmapFileHeader->bfOffBits, SEEK_SET);
 
-    int *permutation = (int *)malloc(bitmapInfoHeader->biSizeImage * sizeof(int));
-    permutation = createPermutationFunction(bitmapInfoHeader->biSizeImage, 78);
+    int *permutation = createPermutationFunction(bitmapInfoHeader->biSizeImage, 78);
 
     for (int i = 0; i < 1 + 8 * strlen(message); i++)
     {
@@ -117,8 +116,8 @@ void decodeText(char *encryptedImageName, char *outputFileName, int msgLength)
 
     FILE *outputTXT = fopen(outputFileName, "w");
 
-    int *permutation = (int *)malloc(bitmapInfoHeader->biSizeImage * sizeof(int));
-    permutation = createPermutationFunction(bitmapInfoHeader->biSizeImage, 78);
+    
+    int *permutation = createPermutationFunction(bitmapInfoHeader->biSizeImage, 78);
 
     char byteWriter[msgLength + 1];
     for (int i = 0; i < msgLength + 1; i++)
