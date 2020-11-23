@@ -11,13 +11,14 @@ void encodeStegano(int nbBits, char *cover, char *secret)
     byte *secretImage = LoadBitmapFile(secret, bitmapInfoHeader, bitmapFileHeader);
 
     //Create the output name
-    // char *outputName = (char *)malloc(sizeof(char) * (6 + strlen(cover) + 1));
-    // outputName = strcat(outputName, "new - ");
-    // outputName = strcat(outputName, cover);
+    char *outputName = (char *)malloc((5+strlen(cover)));
+    outputName[0]='\0';
+    outputName = strcat(outputName, "new-");
+    outputName = strcat(outputName, cover);
 
     //Create the output file
     FILE *outFile;
-    outFile = fopen("outtest.bmp", "w+");
+    outFile = fopen(outputName, "w+");
     if (outFile == NULL)
     {
         //file not created
@@ -80,15 +81,12 @@ void decodeStegano(int nbBits, char *encryptedImage)
         BMPEncoded[i+2] = tempRGB;
     }
 
-    /**
-     * LARKO PLEASE DE TO TOUTO TO THEMA ME TO STRING NAME CAUSE IT'S FUCKED!!!
-     * 
-     */
     char *name = (char *)malloc(5 + strlen(encryptedImage));
+    name[0] = '\0';
     strcat(name, "new-");
     strcat(name, encryptedImage);
 
-    FILE *outputBMP = fopen("decrypt.bmp", "w+");
+    FILE *outputBMP = fopen(name, "w+");
     if (outputBMP == NULL)
     {
         printf("Unable to create file\n");

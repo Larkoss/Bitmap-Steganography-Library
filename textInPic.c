@@ -57,7 +57,12 @@ void encodeText(char *coverImageName, char *inputTextFileName)
         BMPDataArray[i + 2] = tempRGB;
     }
 
-    FILE *outputImage = fopen("newSecretMessage.bmp", "w");
+    char *name = (char *)malloc(5 + strlen(coverImageName));
+    name[0] = '\0';
+    strcat(name, "new-");
+    strcat(name, coverImageName);
+
+    FILE *outputImage = fopen(name, "w");
     FILE *secretMessage = fopen(inputTextFileName, "r");
 
     //Find the length of the file
