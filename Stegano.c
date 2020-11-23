@@ -62,8 +62,10 @@ void encodeStegano(int nbBits, char *cover, char *secret)
         putc(newByte, outFile);
     }
 
-    //read in the bitmap image data
-    //fwrite(coverImage, bitmapInfoHeader->biSizeImage, 1, outFile);
+    fclose(outFile);
+    free(bitmapInfoHeader);
+    free(bitmapFileHeader);
+    free(outputName);
 }
 
 void decodeStegano(int nbBits, char *encryptedImage)
@@ -106,7 +108,10 @@ void decodeStegano(int nbBits, char *encryptedImage)
         putc(newByte,outputBMP);
     }
 
-    
+    fclose(outputBMP);
+    free(bitmapInfoHeader);
+    free(bitmapFileHeader);
+    free(name);
     
 
     
