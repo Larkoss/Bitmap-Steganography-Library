@@ -42,4 +42,8 @@ void grayscale(char *imageName)
         fputc(lum, outFile);
     }
     fclose(outFile);
+    free(bitmapInfoHeader);
+    free(bitmapFileHeader);
+    free(outputName);
+    
 }
