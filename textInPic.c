@@ -98,6 +98,12 @@ void encodeText(char *coverImageName, char *inputTextFileName)
     {
         fputc(BMPDataArray[i], outputImage);
     }
+
+    free(bitmapFileHeader);
+    free(bitmapInfoHeader);
+    free(message);
+    free(permutation);
+
 }
 
 void decodeText(char *encryptedImageName, char *outputFileName, int msgLength)
@@ -141,6 +147,9 @@ void decodeText(char *encryptedImageName, char *outputFileName, int msgLength)
     {
         putc(byteWriter[i], outputTXT);
     }
+    free(bitmapFileHeader);
+    free(bitmapInfoHeader);
+    free(permutation);
 }
 
 #ifdef DEBUGTEXTINPIC
