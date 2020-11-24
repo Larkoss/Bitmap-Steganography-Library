@@ -47,3 +47,4 @@ void grayscale(char *imageName)
     free(outputName);
     free(bitmapImage);
 }
+

@@ -89,6 +89,7 @@ void printMETA(BITMAPINFOHEADER *bitmapInfoHeader, BITMAPFILEHEADER *bitmapFileH
     printf("\nbiClrImportant: %d\n", bitmapInfoHeader->biClrImportant);
 }
 
+
 int main(int args, char *arg[])
 {
     //1
@@ -109,8 +110,8 @@ int main(int args, char *arg[])
     //encodeText(arg[1], arg[2]);
     //decodeText(arg[1], arg[2], 400);
     //5
-    stringToImage(arg[1], arg[2]);
-    imageToString(arg[3]);
+    // stringToImage(arg[1], arg[2]);
+    // imageToString(arg[3]);
 
     
 }

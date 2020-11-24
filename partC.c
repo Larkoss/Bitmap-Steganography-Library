@@ -144,3 +144,4 @@ void imageToString(char *imageName)
     free(imageData);
     fclose(outFile);
 }
+
