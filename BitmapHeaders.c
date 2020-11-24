@@ -99,14 +99,15 @@ int main(int args, char *arg[])
     // int nbBits = 4;
     //encodeStegano(4, arg[1], arg[2]);
     //decodeStegano(4,arg[1]);
-    //stringToImage(arg[1], arg[2]);
+    stringToImage(arg[1], arg[2]);
+    imageToString(arg[3]);
 
     //printf("\n%d",getBit("clear",2));
 
     //encodeText(arg[1],arg[2]);
 
 
-    decodeText(arg[1],arg[2],400);
+    //decodeText(arg[1],arg[2],400);
 
     
 }

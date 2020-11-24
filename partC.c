@@ -1,5 +1,7 @@
 #include "partC.h"
 
+//Function that reads the text from a file
+//and return the number of characters read
 char *readTXT(char *fileName, int *textSize)
 {
     FILE *file = fopen(fileName, "r");
@@ -24,6 +26,9 @@ char *readTXT(char *fileName, int *textSize)
     return code;
 }
 
+//Function that uses function from byteManipulation.c
+//in order to read text, create array of bits and set the 
+//pixels of the image accordingly
 void stringToImage(char *imageName, char *strFile)
 {
     //Read image to calculate new image's Info Header & File Header
@@ -69,8 +74,7 @@ void stringToImage(char *imageName, char *strFile)
     //printf("height = %d, width = %d\n", bitmapInfoHeader->biHeight, bitmapInfoHeader->biWidth);
 
     for (int i = 0; i < bitmapInfoHeader->biSizeImage; i += 3) // fixed semicolon
-    {
-        if (bitData[count] == 0)
+        if (bitData[count++] == 0)
         {
             fputc(0, outFile);
             fputc(0, outFile);
@@ -82,10 +86,12 @@ void stringToImage(char *imageName, char *strFile)
             fputc(128, outFile);
             fputc(128, outFile);
         }
-        count++;
-    }
+    printf("height * width = %d, size = %d", bitmapInfoHeader->biHeight * bitmapInfoHeader->biWidth * 3, bitmapInfoHeader->biSizeImage);
 }
 
+//Reverse engineer the above function in order to read pixels from image
+//find the array of bits it represents and turn it into array of characters
+//which is the text that is added to output file
 void imageToString(char *imageName)
 {
     //Read image to calculate new image's Info Header & File Header
