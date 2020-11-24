@@ -116,3 +116,12 @@ void decodeStegano(int nbBits, char *encryptedImage)
 
     
 }
+#ifdef DEBUGSTEGANO
+int main(int args, char *argv[]){
+    encodeStegano(3,argv[1],argv[2]);
+
+    char name[40];
+    scanf("%s",&name);
+    decodeStegano(3,name);
+}
+#endif // DEBUG

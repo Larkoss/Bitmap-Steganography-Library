@@ -142,3 +142,13 @@ void decodeText(char *encryptedImageName, char *outputFileName, int msgLength)
         putc(byteWriter[i], outputTXT);
     }
 }
+
+#ifdef DEBUGTEXTINPIC
+int main(int args, char *arg[]){
+    //encodeText(arg[1],arg[2]);
+
+
+    decodeText(arg[1],arg[2],400);
+
+}
+#endif // DEBUG
