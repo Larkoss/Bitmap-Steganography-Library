@@ -66,6 +66,8 @@ void encodeStegano(int nbBits, char *cover, char *secret)
     free(bitmapInfoHeader);
     free(bitmapFileHeader);
     free(outputName);
+    free(coverImage);
+    free(secretImage);
 }
 
 void decodeStegano(int nbBits, char *encryptedImage)
@@ -112,9 +114,7 @@ void decodeStegano(int nbBits, char *encryptedImage)
     free(bitmapInfoHeader);
     free(bitmapFileHeader);
     free(name);
-    
-
-    
+    free(BMPEncoded);
 }
 #ifdef DEBUGSTEGANO
 int main(int args, char *argv[]){
