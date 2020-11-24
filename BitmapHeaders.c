@@ -102,18 +102,15 @@ int main(int args, char *arg[])
     //2  
     //grayscale(arg[1]);
     //3
-    int nbBits = 4;
-    encodeStegano(4, arg[1], arg[2]);
-    decodeStegano(4, arg[3]);
-    // stringToImage(arg[1], arg[2]);
-    // imageToString(arg[3]);
-
-    //printf("\n%d",getBit("clear",2));
-
-    //encodeText(arg[1],arg[2]);
-
-
-    //decodeText(arg[1],arg[2],400);
+    // int nbBits = 4;
+    // encodeStegano(4, arg[1], arg[2]);
+    // decodeStegano(4, arg[3]);
+    //4
+    //encodeText(arg[1], arg[2]);
+    //decodeText(arg[1], arg[2], 400);
+    //5
+    stringToImage(arg[1], arg[2]);
+    imageToString(arg[3]);
 
     
 }

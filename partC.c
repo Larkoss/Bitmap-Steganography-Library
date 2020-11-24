@@ -93,6 +93,7 @@ void stringToImage(char *imageName, char *strFile)
     free(bitmapInfoHeader);
     free(bitmapFileHeader);
     free(imageData);
+    free(text);
 }
 
 //Reverse engineer the above function in order to read pixels from image
@@ -141,4 +142,5 @@ void imageToString(char *imageName)
     free(bitmapInfoHeader);
     free(bitmapFileHeader);
     free(imageData);
+    fclose(outFile);
 }

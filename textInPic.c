@@ -103,7 +103,10 @@ void encodeText(char *coverImageName, char *inputTextFileName)
     free(bitmapInfoHeader);
     free(message);
     free(permutation);
-
+    free(BMPDataArray);
+    free(name);
+    fclose(outputImage);
+    fclose(secretMessage);
 }
 
 void decodeText(char *encryptedImageName, char *outputFileName, int msgLength)
@@ -150,6 +153,8 @@ void decodeText(char *encryptedImageName, char *outputFileName, int msgLength)
     free(bitmapFileHeader);
     free(bitmapInfoHeader);
     free(permutation);
+    free(BMPDataArray);
+    fclose(outputTXT);
 }
 
 #ifdef DEBUGTEXTINPIC
