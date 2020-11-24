@@ -45,5 +45,5 @@ void grayscale(char *imageName)
     free(bitmapInfoHeader);
     free(bitmapFileHeader);
     free(outputName);
-    
+    free(bitmapImage);
 }

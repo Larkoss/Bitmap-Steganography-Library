@@ -21,7 +21,7 @@ char *readTXT(char *fileName, int *textSize)
         code[n++] = (char)c;
     }
 
-    fclose(fileName);
+    fclose(file);
     code[n] = '\0';
     *textSize = n;
     return code;

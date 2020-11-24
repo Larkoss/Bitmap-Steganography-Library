@@ -91,16 +91,21 @@ void printMETA(BITMAPINFOHEADER *bitmapInfoHeader, BITMAPFILEHEADER *bitmapFileH
 
 int main(int args, char *arg[])
 {
+    //1
     // BITMAPINFOHEADER *bitmapInfoHeader = (BITMAPINFOHEADER *)malloc(sizeof(BITMAPINFOHEADER));
     // BITMAPFILEHEADER *bitmapFileHeader = (BITMAPFILEHEADER *)malloc(sizeof(BITMAPFILEHEADER));
     // byte *bitmapImage = LoadBitmapFile(arg[1], bitmapInfoHeader, bitmapFileHeader);
     // printMETA(bitmapInfoHeader, bitmapFileHeader);
-    // grayscale(bitmapImage, bitmapInfoHeader, bitmapFileHeader, arg[2]);
+    // free(bitmapFileHeader);
+    // free(bitmapInfoHeader);
+    // free(bitmapImage);
+    //2  
+    grayscale(arg[1]);
     // int nbBits = 4;
     //encodeStegano(4, arg[1], arg[2]);
     //decodeStegano(4,arg[1]);
-    stringToImage(arg[1], arg[2]);
-    imageToString(arg[3]);
+    //stringToImage(arg[1], arg[2]);
+    //imageToString(arg[3]);
 
     //printf("\n%d",getBit("clear",2));
 
