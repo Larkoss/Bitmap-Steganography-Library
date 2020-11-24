@@ -21,6 +21,7 @@ char *readTXT(char *fileName, int *textSize)
         code[n++] = (char)c;
     }
 
+    fclose(fileName);
     code[n] = '\0';
     *textSize = n;
     return code;
@@ -57,6 +58,7 @@ void stringToImage(char *imageName, char *strFile)
         printf("Unable to create file\n");
         exit(-9);
     }
+    free(outputName);
 
     //write the bitmap info header
     fwrite(bitmapFileHeader, sizeof(BITMAPFILEHEADER), 1, outFile);
@@ -86,7 +88,11 @@ void stringToImage(char *imageName, char *strFile)
             fputc(128, outFile);
             fputc(128, outFile);
         }
-    printf("height * width = %d, size = %d", bitmapInfoHeader->biHeight * bitmapInfoHeader->biWidth * 3, bitmapInfoHeader->biSizeImage);
+    fclose(outFile);
+    free(bitData);
+    free(bitmapInfoHeader);
+    free(bitmapFileHeader);
+    free(imageData);
 }
 
 //Reverse engineer the above function in order to read pixels from image
@@ -131,4 +137,8 @@ void imageToString(char *imageName)
                 tempChar += pow(2, 7 - j);
         fputc(tempChar, outFile);
     }
+    free(bitImage);
+    free(bitmapInfoHeader);
+    free(bitmapFileHeader);
+    free(imageData);
 }

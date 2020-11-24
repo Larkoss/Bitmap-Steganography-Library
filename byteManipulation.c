@@ -111,6 +111,11 @@ int *createFinalBitImage(int height, int width, char *imageData, int biImageSize
 			bitImage[count++] = arr[i][j];
 		}
 	}
+
+	//free
+	for (int i = 0; i < h; i++)
+		free(arr[i]);
+	free(arr);
 	return bitImage;
 }
 
@@ -143,4 +148,9 @@ void reverseFinalBitImage(int height, int width, int *bitImage)
 			bitImage[count++] = arr[i][j];
 		}
 	}
+
+	//free
+	for (int i = 0; i < h; i++)
+		free(arr[i]);
+	free(arr);
 }
