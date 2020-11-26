@@ -14,15 +14,6 @@ byte *LoadBitmapFile(char *BMPFileName, BITMAPINFOHEADER *bitmapInfoHeader, BITM
 
     //read the bitmap file header
     fread(bitmapFileHeader, sizeof(BITMAPFILEHEADER), 1, filePtr);
-
-    //verify that this is a bmp file by check bitmap id
-    if (bitmapFileHeader->bfType1 != 0x42 && bitmapFileHeader->bfType2 != 0x4D)
-    {
-        fclose(filePtr);
-        printf("bfType is incorrect\n");
-        exit(-9);
-    }
-
     //read the bitmap info header
     fread(bitmapInfoHeader, sizeof(BITMAPINFOHEADER), 1, filePtr); // small edit. forgot to add the closing bracket at sizeof
 
