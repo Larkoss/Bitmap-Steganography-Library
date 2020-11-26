@@ -3,7 +3,7 @@
 int main(int args, char *argv[])
 {
 
-    printf("bmpSteganography Copyright (C) 2020  Stylianos Sofokleous & Konstantinos Larkou\nThis program comes with ABSOLUTELY NO WARRANTY; for details type `show w'.\nThis is free software, and you are welcome to redistribute it\nunder certain conditions\n");
+    printf("bmpSteganography Copyright (C) 2020  Stylianos Sofokleous & Konstantinos Larkou\nThis program comes with ABSOLUTELY NO WARRANTY.\nThis is free software, and you are welcome to redistribute it\nunder certain conditions\n");
 
     if (args < 3)
     {
@@ -11,6 +11,7 @@ int main(int args, char *argv[])
         exit(-10);
     }
 
+    //OPERATION 1: -list
     if (strcmp(argv[1], "-list") == 0)
     {
         for (int i = 2; i < args; i++)
@@ -32,13 +33,14 @@ int main(int args, char *argv[])
                 continue;
             }
 
-            printMETA(bitmapInfoHeader,bitmapFileHeader);
+            printMETA(bitmapInfoHeader, bitmapFileHeader);
             free(bitmapInfoHeader);
             free(bitmapFileHeader);
             free(bitmapImage);
         }
     }
 
+    //OPERATION 2: -grayscale
     else if (strcmp(argv[1], "-grayscale") == 0)
     {
         for (int i = 2; i < args; i++)
@@ -63,13 +65,46 @@ int main(int args, char *argv[])
             free(bitmapFileHeader);
             free(bitmapImage);
             grayscale(argv[i]);
-            
         }
     }
 
-    else if(strcmp(argv[1], "-encodeStegano") == 0){
-        encodeStegano(atoi(argv[2]),argv[3],argv[4]);
+    //OPERATION 3: -encodeStegano
+    else if (strcmp(argv[1], "-encodeStegano") == 0)
+    {
+        encodeStegano(atoi(argv[2]), argv[3], argv[4]);
     }
 
-     
+    //OPERATION 4: -decodeStegano
+    else if (strcmp(argv[1], "-decodeStegano") == 0)
+    {
+        decodeStegano(atoi(argv[2]), argv[3]);
+    }
+
+    //OPERATION 5: -encodeText
+    else if (strcmp(argv[1], "-encodeText") == 0)
+    {
+        encodeText(argv[2], argv[3]);
+    }
+
+    //OPERATION 6: -decodeText
+    else if (strcmp(argv[1], "-decodeText") == 0)
+    {
+        decodeText(argv[2], atoi(argv[3]), argv[4]);
+    }
+
+    //OPERATION 7: -stringToImage
+    else if (strcmp(argv[1], "-stringToImage") == 0)
+    {
+        stringToImage(argv[2], argv[3]);
+    }
+
+    //OPERATION 8: -imageToString
+    else if (strcmp(argv[1], "-imageToString") == 0)
+    {
+        imageToString(argv[2]);
+    }
+    else
+    {
+        printf("Error! Operation not found\n");
+    }
 }

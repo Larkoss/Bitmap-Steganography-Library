@@ -3,7 +3,7 @@
 int main(int args, char *argv[])
 {
 
-    printf("bmpSteganography Copyright (C) 2020  Stylianos Sofokleous & Konstantinos Larkou\nThis program comes with ABSOLUTELY NO WARRANTY'.\nThis is free software, and you are welcome to redistribute it\nunder certain conditions\n");
+    printf("bmpSteganography Copyright (C) 2020  Stylianos Sofokleous & Konstantinos Larkou\nThis program comes with ABSOLUTELY NO WARRANTY.\nThis is free software, and you are welcome to redistribute it\nunder certain conditions\n");
 
     if (args < 3)
     {
