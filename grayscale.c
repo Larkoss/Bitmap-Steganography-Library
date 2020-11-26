@@ -1,4 +1,4 @@
-#include "grayscale.h"
+#include "bmplib.h"
 void grayscale(char *imageName)
 {
     BITMAPINFOHEADER *bitmapInfoHeader = (BITMAPINFOHEADER *)malloc(sizeof(BITMAPINFOHEADER));

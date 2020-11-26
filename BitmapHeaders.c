@@ -1,7 +1,4 @@
-#include "BitmapHeaders.h"
-#include "grayscale.h"
-#include "Stegano.h"
-#include "textInPic.h"
+#include "bmplib.h"
 
 byte *LoadBitmapFile(char *BMPFileName, BITMAPINFOHEADER *bitmapInfoHeader, BITMAPFILEHEADER *bitmapFileHeader)
 {

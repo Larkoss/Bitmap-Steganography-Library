@@ -1,4 +1,4 @@
-#include "textInPic.h"
+#include "bmplib.h"
 
 int getBit(char *m, int n)
 {

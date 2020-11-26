@@ -5,8 +5,7 @@
 //4. Put the bits back, in a 1d array
 //5. Traverse the 1d array(in ) and set each pixel to 
 
-#include "partC.h"
-#include <math.h>
+#include "bmplib.h"
 
 
 //Function to print array

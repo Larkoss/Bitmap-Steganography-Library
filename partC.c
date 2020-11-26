@@ -1,4 +1,4 @@
-#include "partC.h"
+#include "bmplib.h"
 
 //Function that reads the text from a file
 //and return the number of characters read

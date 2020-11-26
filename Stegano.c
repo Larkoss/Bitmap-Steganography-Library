@@ -1,4 +1,4 @@
-#include "Stegano.h"
+#include "bmplib.h"
 
 void encodeStegano(int nbBits, char *cover, char *secret)
 {
