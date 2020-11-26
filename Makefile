@@ -38,3 +38,7 @@ doxy:
 # To clean .o files: "make clean"
 clean:
 	rm -rf *.o doxygen.log html
+
+library:
+	gcc -c *.c
+	ar -rc bmplib.a *.o
