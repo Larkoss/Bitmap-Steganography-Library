@@ -5,9 +5,9 @@
 
 byte *LoadBitmapFile(char *BMPFileName, BITMAPINFOHEADER *bitmapInfoHeader, BITMAPFILEHEADER *bitmapFileHeader)
 {
-    FILE *filePtr;              //our file pointer
+    FILE *filePtr;     //our file pointer
     byte *bitmapImage; //store image data
-    int imageIdx = 0;           //image index counter
+    int imageIdx = 0;  //image index counter
     byte tempRGB;      //our swap variable
 
     //open filename in read binary mode
@@ -68,7 +68,7 @@ byte *LoadBitmapFile(char *BMPFileName, BITMAPINFOHEADER *bitmapInfoHeader, BITM
 
 void printMETA(BITMAPINFOHEADER *bitmapInfoHeader, BITMAPFILEHEADER *bitmapFileHeader)
 {
-    printf("BITMAP_FILE_HEADER\n==================");
+    printf("\nBITMAP_FILE_HEADER\n==================");
     printf("\nbfType: %c%c", bitmapFileHeader->bfType1, bitmapFileHeader->bfType2);
     printf("\nbfSize: %d", bitmapFileHeader->bfSize);
     printf("\nbfReserved1: %d", bitmapFileHeader->bfReserved1);
@@ -89,18 +89,19 @@ void printMETA(BITMAPINFOHEADER *bitmapInfoHeader, BITMAPFILEHEADER *bitmapFileH
     printf("\nbiClrImportant: %d\n", bitmapInfoHeader->biClrImportant);
 }
 
-
 int main(int args, char *arg[])
 {
-    //1
-    // BITMAPINFOHEADER *bitmapInfoHeader = (BITMAPINFOHEADER *)malloc(sizeof(BITMAPINFOHEADER));
-    // BITMAPFILEHEADER *bitmapFileHeader = (BITMAPFILEHEADER *)malloc(sizeof(BITMAPFILEHEADER));
-    // byte *bitmapImage = LoadBitmapFile(arg[1], bitmapInfoHeader, bitmapFileHeader);
-    // printMETA(bitmapInfoHeader, bitmapFileHeader);
+    for (int i = 1; i < args; i++)
+    {
+        BITMAPINFOHEADER *bitmapInfoHeader = (BITMAPINFOHEADER *)malloc(sizeof(BITMAPINFOHEADER));
+        BITMAPFILEHEADER *bitmapFileHeader = (BITMAPFILEHEADER *)malloc(sizeof(BITMAPFILEHEADER));
+        byte *bitmapImage = LoadBitmapFile(arg[i], bitmapInfoHeader, bitmapFileHeader);
+        printMETA(bitmapInfoHeader, bitmapFileHeader);
+    }
     // free(bitmapFileHeader);
     // free(bitmapInfoHeader);
     // free(bitmapImage);
-    //2  
+    //2
     //grayscale(arg[1]);
     //3
     // int nbBits = 4;
@@ -112,6 +113,4 @@ int main(int args, char *arg[])
     //5
     // stringToImage(arg[1], arg[2]);
     // imageToString(arg[3]);
-
-    
 }
