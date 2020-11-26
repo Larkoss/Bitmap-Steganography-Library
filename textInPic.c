@@ -45,8 +45,24 @@ void encodeText(char *coverImageName, char *inputTextFileName)
 {
     BITMAPFILEHEADER *bitmapFileHeader = (BITMAPFILEHEADER *)malloc(sizeof(BITMAPFILEHEADER));
     BITMAPINFOHEADER *bitmapInfoHeader = (BITMAPINFOHEADER *)malloc(sizeof(BITMAPINFOHEADER));
-
     byte *BMPDataArray = LoadBitmapFile(coverImageName, bitmapInfoHeader, bitmapFileHeader);
+
+    if (bitmapInfoHeader->biCompression != 0)
+    {
+        printf("Image is compressed!\n");
+        free(bitmapInfoHeader);
+        free(bitmapFileHeader);
+        free(BMPDataArray);
+        exit(-10);
+    }
+    if (bitmapFileHeader->bfType1 != 0x42 && bitmapFileHeader->bfType2 != 0x4D)
+    {
+        printf("bfType is incorrect\n");
+        free(bitmapInfoHeader);
+        free(bitmapFileHeader);
+        free(BMPDataArray);
+        exit(-10);
+    }
 
     byte tempRGB;
 
@@ -109,11 +125,29 @@ void encodeText(char *coverImageName, char *inputTextFileName)
     fclose(secretMessage);
 }
 
-void decodeText(char *encryptedImageName, char *outputFileName, int msgLength)
+void decodeText(char *encryptedImageName, int msgLength, char *outputFileName)
 {
     BITMAPFILEHEADER *bitmapFileHeader = (BITMAPFILEHEADER *)malloc(sizeof(BITMAPFILEHEADER));
     BITMAPINFOHEADER *bitmapInfoHeader = (BITMAPINFOHEADER *)malloc(sizeof(BITMAPINFOHEADER));
     byte *BMPDataArray = LoadBitmapFile(encryptedImageName, bitmapInfoHeader, bitmapFileHeader);
+
+    if (bitmapInfoHeader->biCompression != 0)
+    {
+        printf("Image is compressed!\n");
+        free(bitmapInfoHeader);
+        free(bitmapFileHeader);
+        free(BMPDataArray);
+        exit(-10);
+    }
+    if (bitmapFileHeader->bfType1 != 0x42 && bitmapFileHeader->bfType2 != 0x4D)
+    {
+        printf("bfType is incorrect\n");
+        free(bitmapInfoHeader);
+        free(bitmapFileHeader);
+        free(BMPDataArray);
+        exit(-10);
+    }
+
     byte tempRGB;
 
     for (int i = 0; i < bitmapInfoHeader->biSizeImage; i += 3) // fixed semicolon
@@ -125,7 +159,6 @@ void decodeText(char *encryptedImageName, char *outputFileName, int msgLength)
 
     FILE *outputTXT = fopen(outputFileName, "w");
 
-    
     int *permutation = createPermutationFunction(bitmapInfoHeader->biSizeImage, 78);
 
     char byteWriter[msgLength + 1];
@@ -134,16 +167,14 @@ void decodeText(char *encryptedImageName, char *outputFileName, int msgLength)
         byteWriter[i] = 0;
     }
 
-    for (int i = 0; i < 8 * msgLength +1; i++)
+    for (int i = 0; i < 8 * msgLength + 1; i++)
     {
         int o = permutation[i];
         int B = BMPDataArray[o];
 
-
-
         B = B % 2;
-    
-        byteWriter[i / 8] = byteWriter[i / 8] + pow(2,(7 - (i % 8))) * B;
+
+        byteWriter[i / 8] = byteWriter[i / 8] + pow(2, (7 - (i % 8))) * B;
     }
 
     for (int i = 0; i < msgLength; i++)
@@ -158,10 +189,10 @@ void decodeText(char *encryptedImageName, char *outputFileName, int msgLength)
 }
 
 #ifdef DEBUGINPIC
-int main(){
+int main()
+{
 
-    encodeText("IMG_6865.bmp","out.txt");
-
+    encodeText("IMG_6865.bmp", "out.txt");
 }
 
 #endif // DEBUG

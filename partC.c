@@ -28,7 +28,7 @@ char *readTXT(char *fileName, int *textSize)
 }
 
 //Function that uses function from byteManipulation.c
-//in order to read text, create array of bits and set the 
+//in order to read text, create array of bits and set the
 //pixels of the image accordingly
 void stringToImage(char *imageName, char *strFile)
 {
@@ -37,6 +37,22 @@ void stringToImage(char *imageName, char *strFile)
     BITMAPFILEHEADER *bitmapFileHeader = (BITMAPFILEHEADER *)malloc(sizeof(BITMAPFILEHEADER));
     byte *imageData = LoadBitmapFile(imageName, bitmapInfoHeader, bitmapFileHeader);
     //printMETA(bitmapInfoHeader, bitmapFileHeader);
+    if (bitmapInfoHeader->biCompression != 0)
+    {
+        printf("Image is compressed!\n");
+        free(bitmapInfoHeader);
+        free(bitmapFileHeader);
+        free(imageData);
+        exit(-10);
+    }
+    if (bitmapFileHeader->bfType1 != 0x42 && bitmapFileHeader->bfType2 != 0x4D)
+    {
+        printf("bfType is incorrect\n");
+        free(bitmapInfoHeader);
+        free(bitmapFileHeader);
+        free(imageData);
+        exit(-10);
+    }
 
     //Read all character from the file
     int textSize;
@@ -56,6 +72,11 @@ void stringToImage(char *imageName, char *strFile)
     {
         //file not created
         printf("Unable to create file\n");
+        free(bitmapInfoHeader);
+        free(bitmapFileHeader);
+        free(imageData);
+        fclose(outFile);
+        free(outputName);
         exit(-9);
     }
     free(outputName);
@@ -106,12 +127,33 @@ void imageToString(char *imageName)
     BITMAPFILEHEADER *bitmapFileHeader = (BITMAPFILEHEADER *)malloc(sizeof(BITMAPFILEHEADER));
     byte *imageData = LoadBitmapFile(imageName, bitmapInfoHeader, bitmapFileHeader);
 
+    if (bitmapInfoHeader->biCompression != 0)
+    {
+        printf("Image is compressed!\n");
+        free(bitmapInfoHeader);
+        free(bitmapFileHeader);
+        free(imageData);
+        exit(-10);
+    }
+    if (bitmapFileHeader->bfType1 != 0x42 && bitmapFileHeader->bfType2 != 0x4D)
+    {
+        printf("bfType is incorrect\n");
+        free(bitmapInfoHeader);
+        free(bitmapFileHeader);
+        free(imageData);
+        exit(-10);
+    }
+
     //Create the output file
     FILE *outFile;
     outFile = fopen("outputText.txt", "w+");
     if (outFile == NULL)
     {
         //file not created
+        free(bitmapInfoHeader);
+        free(bitmapFileHeader);
+        free(imageData);
+        fclose(outFile);
         printf("Unable to create file\n");
         exit(-9);
     }
@@ -119,9 +161,9 @@ void imageToString(char *imageName)
     int height = bitmapInfoHeader->biHeight, width = bitmapInfoHeader->biWidth;
     int *bitImage = (int *)malloc(sizeof(int) * width * height * 8);
     int count = 0;
-    for (int i = 0; i < bitmapInfoHeader->biSizeImage; i += 3) 
+    for (int i = 0; i < bitmapInfoHeader->biSizeImage; i += 3)
     {
-        if(imageData[i] == 0)
+        if (imageData[i] == 0)
             bitImage[count++] = 0;
         else
             bitImage[count++] = 1;
@@ -130,11 +172,11 @@ void imageToString(char *imageName)
     reverseFinalBitImage(height, width, bitImage);
 
     char tempChar;
-    for(int i = 0; i < count; i+=8)
+    for (int i = 0; i < count; i += 8)
     {
         tempChar = 0;
-        for(int j = 0; j < 8; j++)
-            if(bitImage[i + j] == 1)
+        for (int j = 0; j < 8; j++)
+            if (bitImage[i + j] == 1)
                 tempChar += pow(2, 7 - j);
         fputc(tempChar, outFile);
     }
@@ -147,9 +189,9 @@ void imageToString(char *imageName)
 
 #ifdef DEBUGC
 
-int int main() {
-    stringToImage("IMG_6875.bmp" , "bodies.txt");
-    
+int int main()
+{
+    stringToImage("IMG_6875.bmp", "bodies.txt");
 }
 
 #endif // DEBUG

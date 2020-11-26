@@ -62,6 +62,6 @@ int * createPermutationFunction(int N, unsigned int systemkey);
 
 void encodeText(char *coverImageName, char *inputTextFileName);
 
-void decodeText(char *encryptedImageName, char *outputFileName, int msgLength);
+void decodeText(char *encryptedImageName, int msgLength, char *outputFileName);
 
 #endif

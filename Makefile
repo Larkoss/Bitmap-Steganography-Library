@@ -5,7 +5,7 @@
 # 'make all' build project + manual
 # 'make clean' removes all .o, executable and doxy log
 ###############################################
-PROJ = hw4 # the name of the project
+PROJ = bmpSteganography # the name of the project
 CC = gcc # name of compiler
 DOXYGEN = doxygen # name of doxygen binary
 # define any compile-time flags

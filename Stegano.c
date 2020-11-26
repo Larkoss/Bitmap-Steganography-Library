@@ -144,8 +144,23 @@ void decodeStegano(int nbBits, char *encryptedImage)
 
     BITMAPINFOHEADER *bitmapInfoHeader = (BITMAPINFOHEADER *)malloc(sizeof(BITMAPINFOHEADER));
     BITMAPFILEHEADER *bitmapFileHeader = (BITMAPFILEHEADER *)malloc(sizeof(BITMAPFILEHEADER));
-
     byte *BMPEncoded = LoadBitmapFile(encryptedImage, bitmapInfoHeader, bitmapFileHeader);
+    if (bitmapInfoHeader->biCompression != 0)
+    {
+        printf("Image is compressed!\n");
+        free(bitmapInfoHeader);
+        free(bitmapFileHeader);
+        free(BMPEncoded);
+        exit(-10);
+    }
+    if (bitmapFileHeader->bfType1 != 0x42 && bitmapFileHeader->bfType2 != 0x4D)
+    {
+        printf("bfType is incorrect\n");
+        free(bitmapInfoHeader);
+        free(bitmapFileHeader);
+        free(BMPEncoded);
+        exit(-10);
+    }
 
     byte tempRGB;
     for (int i = 0; i < bitmapInfoHeader->biSizeImage; i += 3)
@@ -164,6 +179,11 @@ void decodeStegano(int nbBits, char *encryptedImage)
     if (outputBMP == NULL)
     {
         printf("Unable to create file\n");
+        free(bitmapInfoHeader);
+        free(bitmapFileHeader);
+        free(BMPEncoded);
+        free(name);
+        fclose(outputBMP);
         exit(-9);
     }
 
