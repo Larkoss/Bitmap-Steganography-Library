@@ -154,3 +154,9 @@ void reverseFinalBitImage(int height, int width, int *bitImage)
 		free(arr[i]);
 	free(arr);
 }
+
+#ifdef DEBUG
+int main(){
+	return 0;
+}
+#endif // DEBUG

@@ -145,3 +145,11 @@ void imageToString(char *imageName)
     fclose(outFile);
 }
 
+#ifdef DEBUGC
+
+int int main() {
+    stringToImage("IMG_6875.bmp" , "bodies.txt");
+    
+}
+
+#endif // DEBUG

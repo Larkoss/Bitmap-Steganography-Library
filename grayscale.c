@@ -48,3 +48,11 @@ void grayscale(char *imageName)
     free(bitmapImage);
 }
 
+#ifdef DEBUGGRAY
+int main(){
+
+    grayscale("IMG_6865.bmp");
+
+}
+#endif // DEBUG
+

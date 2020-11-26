@@ -116,3 +116,14 @@ void decodeStegano(int nbBits, char *encryptedImage)
     free(name);
     free(BMPEncoded);
 }
+
+#ifdef DEBUGSTEGANO
+
+int main(){
+
+    encodeStegano(4,"IMG_6865.bmp","IMG_6875.bmp");
+    decodeStegano(4,"new-IMG_6865.bmp");
+
+}
+
+#endif // DEBUG

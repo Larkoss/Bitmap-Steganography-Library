@@ -157,3 +157,11 @@ void decodeText(char *encryptedImageName, char *outputFileName, int msgLength)
     fclose(outputTXT);
 }
 
+#ifdef DEBUGINPIC
+int main(){
+
+    encodeText("IMG_6865.bmp","out.txt");
+
+}
+
+#endif // DEBUG

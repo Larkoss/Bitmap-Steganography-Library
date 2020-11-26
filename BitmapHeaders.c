@@ -89,8 +89,19 @@ void printMETA(BITMAPINFOHEADER *bitmapInfoHeader, BITMAPFILEHEADER *bitmapFileH
     printf("\nbiClrImportant: %d\n", bitmapInfoHeader->biClrImportant);
 }
 
+
+#ifdef DEBUGHEAD
 int main(int args, char *arg[])
 {
+
+    /**
+     * <program> Copyright (C) <year> <name of author>
+        This program comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
+        This is free software, and you are welcome to redistribute it
+        under certain conditions;   
+     * 
+     */
+
     for (int i = 1; i < args; i++)
     {
         BITMAPINFOHEADER *bitmapInfoHeader = (BITMAPINFOHEADER *)malloc(sizeof(BITMAPINFOHEADER));
@@ -114,3 +125,4 @@ int main(int args, char *arg[])
     // stringToImage(arg[1], arg[2]);
     // imageToString(arg[3]);
 }
+#endif // DEBUG
