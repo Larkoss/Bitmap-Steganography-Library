@@ -1,8 +1,7 @@
-#include "wav.h"
+#include "bmplib.h"
 
 void encodeAudio(char *pictureName, char *AudioFile)
 {
-
     BITMAPINFOHEADER *bitmapInfoHeader = (BITMAPINFOHEADER *)malloc(sizeof(BITMAPINFOHEADER));
     BITMAPFILEHEADER *bitmapFileHeader = (BITMAPFILEHEADER *)malloc(sizeof(BITMAPFILEHEADER));
     byte *bitmapImage = LoadBitmapFile(pictureName, bitmapInfoHeader, bitmapFileHeader);
@@ -25,10 +24,9 @@ void encodeAudio(char *pictureName, char *AudioFile)
     int *newImage = createBitImage(bitmapInfoHeader->biHeight, bitmapInfoHeader->biWidth, wavData, sizeOfFIle - 44);
 
     int count = 0;
-    printf("height = %d, width = %d\n", bitmapInfoHeader->biHeight, bitmapInfoHeader->biWidth);
-    //fwrite(wavData,sizeof(wavData),1,newAudioImage);
 
-    for (int i = 0; i < bitmapInfoHeader->biSizeImage; i += 3) // fixed semicolon
+    for (int i = 0; i < bitmapInfoHeader->biSizeImage; i += 3)
+    { // fixed semicolon
         if (newImage[count++] == 0)
         {
             fputc(0, newAudioImage);
@@ -41,6 +39,15 @@ void encodeAudio(char *pictureName, char *AudioFile)
             fputc(128, newAudioImage);
             fputc(128, newAudioImage);
         }
+    }
+
+    free(wavHeader);
+    free(bitmapInfoHeader);
+    free(bitmapFileHeader);
+    free(bitmapImage);
+    free(wavData);
+    free(newImage);
+    fclose(newAudioImage);
 }
 
 void decodeAudio(char *BMPFileName)
@@ -59,10 +66,10 @@ void decodeAudio(char *BMPFileName)
         bytes[i + 2] = tempRGB;
     }
 
-    for(int i = 0; i<44;i++){
-        fputc(bytes[i],WAVOut);
+    for (int i = 0; i < 44; i++)
+    {
+        fputc(bytes[i], WAVOut);
     }
-
 
     /**
      * @brief Read 3 bytes and creates an array of bits
@@ -71,7 +78,7 @@ void decodeAudio(char *BMPFileName)
     int height = bitmapInfoHeader->biHeight, width = bitmapInfoHeader->biWidth;
     int *bits = (int *)malloc(sizeof(int) * width * height * 8);
     int count = 0;
-    for (int i = 44; i < bitmapInfoHeader->biSizeImage; i+= 3)
+    for (int i = 44; i < bitmapInfoHeader->biSizeImage; i += 3)
     {
         if (bytes[i] == 0)
             bits[count++] = 0;
@@ -88,6 +95,12 @@ void decodeAudio(char *BMPFileName)
                 tempChar += pow(2, 7 - j);
         fputc(tempChar, WAVOut);
     }
+
+    fclose(WAVOut);
+    free(bitmapInfoHeader);
+    free(bitmapFileHeader);
+    free(bytes);
+
 }
 
 /**
@@ -116,7 +129,10 @@ unsigned char *LoadWavFile(char *WAVfilename, WAVHEADER *header, long *size)
     fread(WAVdata, sizeFile - 44, 1, WAVFile);
 
     *size = sizeFile;
+    fclose(WAVFile);
     return (WAVdata);
+
+    
 }
 
 #ifdef DEBUGAUDIO
