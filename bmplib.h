@@ -80,6 +80,8 @@ void encodeText(char *coverImageName, char *inputTextFileName);
 
 void decodeText(char *encryptedImageName, int msgLength, char *outputFileName);
 
+//Extra operations
+
 void redscale(char *imageName);
 
 void greenscale(char *imageName);

@@ -56,13 +56,25 @@ $./bmpSteganography –decodeText encryptedImage.bmp msgLength output.txt
 ## Operation 7: Create a bmp image from text
 $./bmpSteganography –stringToImage sampleImage.bmp inputText.txt
 
-This function implements what is described in section C. of Chapter IV. The text in the inputText .txt "converted" to a bmp image which will be a gray image. Note that the length of the text must be sufficient to fill the dimensions of the image and make a result visible to the naked eye. The sampleImage .bmp used only to assign the generated image the same values for the BITMAP_FILE_HEADER and BITMAP_INFO_HEADER.
+This function implements what is described in section C. of Chapter IV. The text in the inputText .txt is "converted" to a bmp image which will be a gray image. Note that the length of the text must be sufficient to fill the dimensions of the image and make a result visible to the naked eye. The sampleImage .bmp used only to assign the generated image the same values for the BITMAP_FILE_HEADER and BITMAP_INFO_HEADER.
 ![alt text](https://i.imgur.com/ztYmvre.png)
 
 ## Operation 8: Decoding/Retrieving secret text from a bmp image 
 $./bmpSteganography –imageToString encryptedTextImage.bmp
 
 A text file named outputText.txt is created.
+
+# Extra Operations
+## Operation 1: Create a bmp image from audio
+$./bmpSteganography -encodeAudio sampleImage.bmp sound.wav
+
+The audio in the sound .wav is "converted" to a bmp image which will be a gray image. Note that the length of the audio must be sufficient to fill the dimensions of the image and make a result visible to the naked eye. The sampleImage .bmp used only to assign the generated image the same values for the BITMAP_FILE_HEADER and 
+
+## Operation 2: Decoding/Retrieving secret audio from a bmp image 
+$./bmpSteganography –decodeAudio encryptedAudioImage.bmp
+
+A text file named Decrypted.wav is created.
+
 
 
 

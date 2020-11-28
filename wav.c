@@ -100,7 +100,7 @@ void decodeAudio(char *BMPFileName)
     free(bitmapInfoHeader);
     free(bitmapFileHeader);
     free(bytes);
-
+    free(bits);
 }
 
 /**
