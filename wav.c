@@ -31,7 +31,7 @@ void encodeAudio(char *pictureName, char *AudioFile)
     int count = 0;
     printf("height = %d, width = %d\n", bitmapInfoHeader->biHeight, bitmapInfoHeader->biWidth);
 
-    for (int i = 0; i < bitmapInfoHeader->biSizeImage; i += 3) // fixed semicolon
+    for (int i = 0; i < bitmapInfoHeader->biSizeImage; i +=3) // fixed semicolon
         if (newImage[count++] == 0)
         {
             fputc(0, newAudioImage);
@@ -44,11 +44,46 @@ void encodeAudio(char *pictureName, char *AudioFile)
             fputc(128, newAudioImage);
             fputc(128, newAudioImage);
         }
+}
+
+void decodeAudio(char *BMPFileName){
+    BITMAPINFOHEADER *bitmapInfoHeader = (BITMAPINFOHEADER *)malloc(sizeof(BITMAPINFOHEADER));
+    BITMAPFILEHEADER *bitmapFileHeader = (BITMAPFILEHEADER *)malloc(sizeof(BITMAPFILEHEADER));
+    byte *bytes = LoadBitmapFile(BMPFileName, bitmapInfoHeader, bitmapFileHeader);
+
+    FILE *WAVOut = fopen("Decrypted.wav","w");
+
+    for(int i = 0;i<44;i++){
+        fputc(bytes[i],WAVOut);
+    }
+
+    /**
+     * @brief Read 3 bytes and creates an array of bits
+     * 
+     */
+    int height = bitmapInfoHeader->biHeight, width = bitmapInfoHeader->biWidth;
+    int *bits = (int *)malloc(sizeof(int) * width * height * 8);
+    int count = 0;
+    for (int i = 44; i < bitmapInfoHeader->biSizeImage; i ++)
+    {
+        if (bytes[i] == 0)
+            bits[count++] = 0;
+        else
+            bits[count++] = 1;
+    }
+
+    char tempChar=0;
+    for (int i = 0; i < count; i += 8)
+    {
+        tempChar = 0;
+        for (int j = 0; j < 8; j++)
+            if (bits[i + j] == 1)
+                tempChar += pow(2, 7 - j);
+        fputc(tempChar, WAVOut);
+    }
 
 
-    
 
-    
 
 }
 
@@ -85,5 +120,6 @@ unsigned char *LoadWavFile(char *WAVfilename, WAVHEADER *header, long *size)
 int main()
 {
     encodeAudio("IMG_6865.bmp", "Click2-Sebastian-759472264.wav");
+    decodeAudio("NewAudio.bmp");
 }
 #endif // DEBUG
