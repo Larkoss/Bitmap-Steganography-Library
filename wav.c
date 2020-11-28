@@ -22,7 +22,7 @@ void encodeAudio(char *pictureName, char *AudioFile)
     fseek(newAudioImage, bitmapFileHeader->bfOffBits, SEEK_SET);
     fwrite(wavHeader, sizeof(WAVHEADER), 1, newAudioImage);
     fseek(newAudioImage, bitmapFileHeader->bfOffBits + 44, SEEK_SET);
-    int *newImage = createFinalBitImage(bitmapInfoHeader->biHeight, bitmapInfoHeader->biWidth, wavData, sizeOfFIle - 44);
+    int *newImage = createBitImage(bitmapInfoHeader->biHeight, bitmapInfoHeader->biWidth, wavData, sizeOfFIle - 44);
 
     int count = 0;
     printf("height = %d, width = %d\n", bitmapInfoHeader->biHeight, bitmapInfoHeader->biWidth);
