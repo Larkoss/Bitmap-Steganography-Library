@@ -84,6 +84,6 @@ unsigned char *LoadWavFile(char *WAVfilename, WAVHEADER *header, long *size)
 #ifdef DEBUGAUDIO
 int main()
 {
-    encodeAudio("Untitled.bmp", "Tainted_Love.wav");
+    encodeAudio("IMG_6865.bmp", "Click2-Sebastian-759472264.wav");
 }
 #endif // DEBUG
