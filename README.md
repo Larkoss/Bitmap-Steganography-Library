@@ -33,26 +33,31 @@ The –grayscale argument applies the grayscale filter that converts the color o
 $./bmpSteganography –encodeStegano nbBits coverImage.bmp secretImage.bmp 
 
 The result of performing this operation is to create an image named newcoverImage.bmp which is the cover image with the secret image inside it. Its name is created by the name of the cover image by adding the prefix "new-" . The nbBits parameter shows the number of bits of the cover image that change by inserting so many more bits from the secret image.
+![alt text](https://i.imgur.com/GPB7E20.png)
 
 ## Operation 4: Decoding/Retrieving a secret image from another image
 $./bmpSteganography –decodeStegano nbBits encryptedImage.bmp 
 
 The result of performing this operation is to create an image named newencryptedImage.bmp which is the secret image. Its name is created by the name of the cover image by adding the prefix "new-" . The nbBits parameter shows the number of bits of the cover image that change by inserting so many more bits from the secret image. 
+![alt text](https://i.imgur.com/ZFrumMk.png)
 
 ## Operation 5: Encode text within an image
 $./bmpSteganography –encodeText coverImage.bmp inputText.txt 
 
 The result of performing this operation is to create an image named newcoverImage.bmp which is a bmp image with inputText text embedded in it.txt. Its name is created by the name of the cover image by adding the prefix "new-" .
+![alt text](https://i.imgur.com/oavDjho.png)
 
 ## Operation 6: Decoding/Retrieving secret text from an image
 $./bmpSteganography –decodeText encryptedImage.bmp msgLength output.txt 
 
  The result of performing this operation is to create a text file with the message retrieved from the encrypted Image encryptedImage.bmp. To do this operation, you must do the opposite procedure that you did for operation 6. To get the final text, you must know its length in characters, which is given to the command line by the msgLeggth parameter. The message must be the same in its format (same lines) as the message encoded in mode 6.
+![alt text](https://i.imgur.com/z40EzEC.png)
 
 ## Operation 7: Create a bmp image from text
 $./bmpSteganography –stringToImage sampleImage.bmp inputText.txt
 
 This function implements what is described in section C. of Chapter IV. The text in the inputText .txt "converted" to a bmp image which will be a gray image. Note that the length of the text must be sufficient to fill the dimensions of the image and make a result visible to the naked eye. The sampleImage .bmp used only to assign the generated image the same values for the BITMAP_FILE_HEADER and BITMAP_INFO_HEADER.
+![alt text](https://i.imgur.com/ztYmvre.png)
 
 ## Operation 8: Decoding/Retrieving secret text from a bmp image 
 $./bmpSteganography –imageToString encryptedTextImage.bmp
