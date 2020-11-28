@@ -69,4 +69,7 @@ void redscale(char *imageName);
 void greenscale(char *imageName);
 
 void bluescale(char *imageName);
+
+int *createBitImage(int height, int width, char *image, int imageSize);
+
 #endif
