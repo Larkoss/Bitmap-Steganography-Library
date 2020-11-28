@@ -27,6 +27,8 @@ biClrImportant: 0 <br />
 $./bmpSteganography –grayscale image1.bmp [ image2.bmp image3.bmp ...] 
 
 The –grayscale argument applies the grayscale filter that converts the color of each pixel to shades of gray. To do this, each pixel must be converted to the following logic: Each pixel takes up 3 bytes (if 24bit color depth is used). In particular, these bytes are broken down as follows: red=1 byte, green=1 byte, blue=1 byte. These bytes are multiplied using the NTSC (National Television System Committee) equation: 0.299*red + 0.587*green + 0.114*blue. The rounded result of the NTSC equation on each individual 3-byte RGB sequence of the file will be called absolute brightness. For example, for an RGB= pixel(9,90,160), luminance is 0.299*9 + 0.587*90 + 0.114*160 = 73,761. Therefore, the gray version of the pixel must be (74,74,74). If we repeat the above equation for all pixels in an image we will get the result needed.
+![alt text](https://prnt.sc/vry8c9)
+![alt text](https://prnt.sc/vry8ot)
 
 ## Operation 3: Encode a secret image within another image
 $./bmpSteganography –encodeStegano nbBits coverImage.bmp secretImage.bmp 
