@@ -5,23 +5,23 @@ The –list argument refers to printing the header elements of a specified image
 
 $./bmpSteganography –list 4x3.bmp image2.bmp 
 
-BITMAP_FILE_HEADER ================== 
-bfType: BM 
-bfSize: 104 
-bfReserved1: 0 
-bfReserved2: 0 
-bfOffBits: 54 
-BITMAP_INFO_HEADER ================== 
-biSize: 40 
-biWidth: 3 
-biHeight: 4 
-biPlanes: 1 
-biBitCount: 24 
-biCompression: 0 biSizeImage: 50 
-biXPelsPerMeter: 2834 
-biYPelsPerMeter: 2834 
-biClrUsed: 0 
-biClrImportant: 0 
+BITMAP_FILE_HEADER ================== <br />
+bfType: BM <br />
+bfSize: 104 <br />
+bfReserved1: 0 <br />
+bfReserved2: 0 <br />
+bfOffBits: 54 <br />
+BITMAP_INFO_HEADER ================== <br />
+biSize: 40 <br />
+biWidth: 3 <br />
+biHeight: 4 <br />
+biPlanes: 1 <br />
+biBitCount: 24 <br />
+biCompression: 0 biSizeImage: 50 <br />
+biXPelsPerMeter: 2834 <br />
+biYPelsPerMeter: 2834 <br />
+biClrUsed: 0 <br />
+biClrImportant: 0 <br />
 
 ## Operation 2: Grayscale Filter 
 $./bmpSteganography –grayscale image1.bmp [ image2.bmp image3.bmp ...] 
