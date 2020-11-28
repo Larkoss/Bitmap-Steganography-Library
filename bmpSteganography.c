@@ -103,6 +103,87 @@ int main(int args, char *argv[])
     {
         imageToString(argv[2]);
     }
+    //OPERATION 9: -redscale
+    else if (strcmp(argv[1], "-greenscale") == 0)
+    {
+        for (int i = 2; i < args; i++)
+        {
+            BITMAPINFOHEADER *bitmapInfoHeader = (BITMAPINFOHEADER *)malloc(sizeof(BITMAPINFOHEADER));
+            BITMAPFILEHEADER *bitmapFileHeader = (BITMAPFILEHEADER *)malloc(sizeof(BITMAPFILEHEADER));
+            byte *bitmapImage = LoadBitmapFile(argv[i], bitmapInfoHeader, bitmapFileHeader);
+
+            //verify that this is a bmp file by check bitmap id
+            if (bitmapFileHeader->bfType1 != 0x42 && bitmapFileHeader->bfType2 != 0x4D)
+            {
+                printf("bfType is incorrect\n");
+                continue;
+            }
+
+            if (bitmapInfoHeader->biCompression != 0)
+            {
+                printf("Image is compressed!\n");
+                continue;
+            }
+            free(bitmapInfoHeader);
+            free(bitmapFileHeader);
+            free(bitmapImage);
+            greenscale(argv[i]);
+        }
+    }
+     //OPERATION 10: -redscale
+    else if (strcmp(argv[1], "-redscale") == 0)
+    {
+        for (int i = 2; i < args; i++)
+        {
+            BITMAPINFOHEADER *bitmapInfoHeader = (BITMAPINFOHEADER *)malloc(sizeof(BITMAPINFOHEADER));
+            BITMAPFILEHEADER *bitmapFileHeader = (BITMAPFILEHEADER *)malloc(sizeof(BITMAPFILEHEADER));
+            byte *bitmapImage = LoadBitmapFile(argv[i], bitmapInfoHeader, bitmapFileHeader);
+
+            //verify that this is a bmp file by check bitmap id
+            if (bitmapFileHeader->bfType1 != 0x42 && bitmapFileHeader->bfType2 != 0x4D)
+            {
+                printf("bfType is incorrect\n");
+                continue;
+            }
+
+            if (bitmapInfoHeader->biCompression != 0)
+            {
+                printf("Image is compressed!\n");
+                continue;
+            }
+            free(bitmapInfoHeader);
+            free(bitmapFileHeader);
+            free(bitmapImage);
+            redscale(argv[i]);
+        }
+    }
+    //OPERATION 11: -bluescale
+    else if (strcmp(argv[1], "-bluescale") == 0)
+    {
+        for (int i = 2; i < args; i++)
+        {
+            BITMAPINFOHEADER *bitmapInfoHeader = (BITMAPINFOHEADER *)malloc(sizeof(BITMAPINFOHEADER));
+            BITMAPFILEHEADER *bitmapFileHeader = (BITMAPFILEHEADER *)malloc(sizeof(BITMAPFILEHEADER));
+            byte *bitmapImage = LoadBitmapFile(argv[i], bitmapInfoHeader, bitmapFileHeader);
+
+            //verify that this is a bmp file by check bitmap id
+            if (bitmapFileHeader->bfType1 != 0x42 && bitmapFileHeader->bfType2 != 0x4D)
+            {
+                printf("bfType is incorrect\n");
+                continue;
+            }
+
+            if (bitmapInfoHeader->biCompression != 0)
+            {
+                printf("Image is compressed!\n");
+                continue;
+            }
+            free(bitmapInfoHeader);
+            free(bitmapFileHeader);
+            free(bitmapImage);
+            bluescale(argv[i]);
+        }
+    }
     else
     {
         printf("Error! Operation not found\n");

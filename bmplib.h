@@ -64,4 +64,9 @@ void encodeText(char *coverImageName, char *inputTextFileName);
 
 void decodeText(char *encryptedImageName, int msgLength, char *outputFileName);
 
+void redscale(char *imageName);
+
+void greenscale(char *imageName);
+
+void bluescale(char *imageName);
 #endif
