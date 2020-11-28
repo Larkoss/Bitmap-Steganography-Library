@@ -26,6 +26,7 @@ void encodeAudio(char *pictureName, char *AudioFile)
 
     int count = 0;
     printf("height = %d, width = %d\n", bitmapInfoHeader->biHeight, bitmapInfoHeader->biWidth);
+    //fwrite(wavData,sizeof(wavData),1,newAudioImage);
 
     for (int i = 0; i < bitmapInfoHeader->biSizeImage; i += 3) // fixed semicolon
         if (newImage[count++] == 0)
@@ -50,11 +51,18 @@ void decodeAudio(char *BMPFileName)
 
     FILE *WAVOut = fopen("Decrypted.wav", "w");
 
-    WAVHEADER *wavHeader = (WAVHEADER *)malloc(sizeof(WAVHEADER));
-    long wavSize;
-    LoadWavFile("Click2-Sebastian-759472264.wav", wavHeader, &wavSize);
-    fwrite(wavHeader, sizeof(WAVHEADER), 1, WAVOut);
-    fseek(WAVOut, 44, SEEK_SET);
+    byte tempRGB;
+    for (int i = 0; i < bitmapInfoHeader->biSizeImage; i += 3)
+    {
+        tempRGB = bytes[i];
+        bytes[i] = bytes[i + 2];
+        bytes[i + 2] = tempRGB;
+    }
+
+    for(int i = 0; i<44;i++){
+        fputc(bytes[i],WAVOut);
+    }
+
 
     /**
      * @brief Read 3 bytes and creates an array of bits
