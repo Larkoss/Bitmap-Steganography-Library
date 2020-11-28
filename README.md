@@ -75,6 +75,12 @@ $./bmpSteganography –decodeAudio encryptedAudioImage.bmp
 
 A text file named Decrypted.wav is created.
 
+## Operation 3: RGB Filters
+$./bmpSteganography –redscale image1.bmp
+$./bmpSteganography -greencale image1.bmp
+$./bmpSteganography –bluescale image1.bmp
+
+The –****scale argument applies the filter that converts the color of each pixel to shades of the color. To do this, each pixel must be converted to the following logic: Each pixel takes up 3 bytes (if 24bit color depth is used). In particular, these bytes are broken down as follows: red=1 byte, green=1 byte, blue=1 byte. So according to the which filter is chosen, 2 out of 3 bytes are set to 0 and the remaining is kept as it is.
 
 
 
