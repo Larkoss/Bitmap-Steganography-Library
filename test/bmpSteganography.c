@@ -21,7 +21,7 @@ int main(int args, char *argv[])
             byte *bitmapImage = LoadBitmapFile(argv[i], bitmapInfoHeader, bitmapFileHeader);
 
             //verify that this is a bmp file by check bitmap id
-            if (bitmapFileHeader->bfType1 != 0x42 && bitmapFileHeader->bfType2 != 0x4D)
+            if ((bitmapFileHeader->bfType1 != 0x42 && bitmapFileHeader->bfType2 != 0x4D)|| bitmapInfoHeader->biBitCount!=24)
             {
                 printf("bfType is incorrect\n");
                 continue;
@@ -50,7 +50,7 @@ int main(int args, char *argv[])
             byte *bitmapImage = LoadBitmapFile(argv[i], bitmapInfoHeader, bitmapFileHeader);
 
             //verify that this is a bmp file by check bitmap id
-            if (bitmapFileHeader->bfType1 != 0x42 && bitmapFileHeader->bfType2 != 0x4D)
+            if ((bitmapFileHeader->bfType1 != 0x42 && bitmapFileHeader->bfType2 != 0x4D)|| bitmapInfoHeader->biBitCount!=24)
             {
                 printf("bfType is incorrect\n");
                 continue;
@@ -113,7 +113,7 @@ int main(int args, char *argv[])
             byte *bitmapImage = LoadBitmapFile(argv[i], bitmapInfoHeader, bitmapFileHeader);
 
             //verify that this is a bmp file by check bitmap id
-            if (bitmapFileHeader->bfType1 != 0x42 && bitmapFileHeader->bfType2 != 0x4D)
+            if ((bitmapFileHeader->bfType1 != 0x42 && bitmapFileHeader->bfType2 != 0x4D)|| bitmapInfoHeader->biBitCount!=24)
             {
                 printf("bfType is incorrect\n");
                 continue;
@@ -140,7 +140,7 @@ int main(int args, char *argv[])
             byte *bitmapImage = LoadBitmapFile(argv[i], bitmapInfoHeader, bitmapFileHeader);
 
             //verify that this is a bmp file by check bitmap id
-            if (bitmapFileHeader->bfType1 != 0x42 && bitmapFileHeader->bfType2 != 0x4D)
+            if ((bitmapFileHeader->bfType1 != 0x42 && bitmapFileHeader->bfType2 != 0x4D)|| bitmapInfoHeader->biBitCount!=24)
             {
                 printf("bfType is incorrect\n");
                 continue;
@@ -167,7 +167,7 @@ int main(int args, char *argv[])
             byte *bitmapImage = LoadBitmapFile(argv[i], bitmapInfoHeader, bitmapFileHeader);
 
             //verify that this is a bmp file by check bitmap id
-            if (bitmapFileHeader->bfType1 != 0x42 && bitmapFileHeader->bfType2 != 0x4D)
+            if ((bitmapFileHeader->bfType1 != 0x42 && bitmapFileHeader->bfType2 != 0x4D)|| bitmapInfoHeader->biBitCount!=24)
             {
                 printf("bfType is incorrect\n");
                 continue;
