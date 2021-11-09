@@ -1,4 +1,3 @@
-# HW4-Fall20
 # Library bmlib.a
 ## Operation 1: Export meta-data
 The –list argument refers to printing the header elements of a specified image in the following format.
